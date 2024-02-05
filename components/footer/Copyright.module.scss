@@ -1,0 +1,105 @@
+@import "assets/scss/utils.scss";
+@import "assets/scss/PrivacyAndCookieModal.module.scss";
+
+.copyright {
+  padding: 4vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  @include devicesMax(tablet) {
+    padding: 10vw 2.5vw 2vw 2.5vw;
+  }
+
+  @include devicesMax(mobile) {
+    flex-direction: column-reverse;
+    justify-content: center;
+    gap: 7vw;
+  }
+
+  @include devicesMax(mobile) {
+    margin-bottom: 5vw;
+  }
+
+  .text {
+    color: #fff;
+    display: inline-block;
+    font-family: VisbyCF-Regular;
+    font-size: 1rem;
+    letter-spacing: 100%;
+    text-align: left;
+
+    @include devicesMax(tabletMini) {
+      font-size: 12px;
+    }
+
+    @include devicesMax(mobile) {
+      font-size: 14px;
+    }
+  }
+
+  .links {
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4vw;
+
+    @include devicesMax(mobile) {
+      margin-bottom: 0;
+      margin-left: 0;
+    }
+
+    .link {
+      color: #fff;
+      font-family: VisbyCF-Regular;
+      font-size: 1rem;
+      letter-spacing: 100%;
+
+      @include devicesMax(tabletMini) {
+        font-size: 12px;
+      }
+
+      @include devicesMax(mobile) {
+        font-size: 1rem;
+      }
+
+      &:nth-child(1),
+      &:nth-child(2) {
+        text-decoration: underline;
+        text-decoration-color: #ffffff75;
+        cursor: pointer;
+
+        @include devicesMax(mobile) {
+          text-decoration-color: #ffffff75;
+        }
+      }
+    }
+  }
+
+  .social {
+    display: flex;
+    align-items: center;
+    gap: 4vw;
+    margin: 0;
+    margin-left: 10vw;
+
+    @include devicesMax(mobile) {
+      margin-left: 0;
+    }
+
+    @include devicesMax(mobile) {
+      gap: 15vw;
+    }
+
+    .icon {
+      height: 2rem;
+
+      @include devicesMax(tablet) {
+        height: 1.75rem;
+      }
+    }
+  }
+}

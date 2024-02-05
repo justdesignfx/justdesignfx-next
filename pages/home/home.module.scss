@@ -1,0 +1,212 @@
+.hero {
+  color: var(--white);
+  padding-bottom: desktop-vw(200px);
+  position: relative;
+
+  .text {
+    > h1 {
+      span {
+        display: flex;
+      }
+
+      .lookAhead {
+        font-family: var(--font-vanguard-cf);
+        font-size: desktop-vw(30px);
+      }
+
+      .theFuture {
+        font-family: var(--font-vanguard-cf);
+        font-size: desktop-vw(145px);
+        font-weight: 700;
+        margin-bottom: desktop-vw(-40px);
+      }
+
+      .hasArrived {
+        font-family: var(--font-vanguard-cf);
+        font-size: desktop-vw(145px);
+        font-weight: 700;
+        margin-bottom: desktop-vw(50px);
+      }
+
+      .agency {
+        font-family: var(--font-vanguard-cf);
+        font-size: desktop-vw(30px);
+      }
+
+      .italic {
+        font-family: var(--font-ageya-oblique);
+        font-weight: 100;
+        font-size: desktop-vw(165px);
+        transform: translateY(desktop-vw(-5px));
+      }
+    }
+  }
+
+  .videoC {
+    @include dims(desktop-vw(460px));
+    border-radius: desktop-vw(32px);
+    overflow: hidden;
+  }
+
+  .waterBlob {
+    @include position(absolute, auto, auto, desktop-vw(-400px), 0);
+    @include dims(desktop-vw(800px), auto);
+    transform: rotate(20deg);
+  }
+}
+
+.works {
+  background-color: var(--bleached-silk);
+  border-radius: desktop-vw(32px);
+  overflow: hidden;
+
+  .marqueeContent {
+    color: var(--black);
+    font-family: var(--font-vanguard-cf);
+    font-size: desktop-vw(275px);
+    font-weight: 700;
+
+    .rightMargin {
+      margin-right: desktop-vw(60px);
+    }
+
+    .inlineO {
+      font-family: var(--font-ageya-oblique);
+      font-weight: 100;
+      margin-left: desktop-vw(-50px);
+      margin-right: 0;
+    }
+  }
+
+  .takeALook {
+    width: desktop-vw(860px);
+    position: relative;
+
+    .firstLine {
+      display: block;
+      text-align: start;
+
+      .inlineALook {
+        display: inline-block;
+        font-family: var(--font-ageya-oblique);
+        font-weight: 100;
+        letter-spacing: 0px;
+        margin: 0 1.5vw;
+
+        .inlineA {
+          display: inline-block;
+          font-family: var(--font-ageya-oblique);
+          font-weight: 100;
+          margin-right: 1vw;
+        }
+
+        .inlineOo {
+          display: inline-block;
+          font-family: var(--font-ageya-oblique);
+          font-weight: 100;
+          letter-spacing: -1vw;
+          margin-right: 1vw;
+        }
+      }
+    }
+
+    .secondLine {
+      display: block;
+      text-align: end;
+      transform: translateY(-1.5vw) skew(-10deg);
+    }
+
+    .thirdLine {
+      display: block;
+      text-align: start;
+      padding-left: 14vw;
+      transform: translateY(-3vw);
+    }
+
+    > h3 {
+      color: var(--black);
+      font-family: var(--font-vanguard-cf);
+      font-weight: 700;
+      font-size: desktop-vw(100px);
+
+      .inlineO {
+        font-family: var(--font-ageya-oblique);
+        font-weight: 100;
+        margin-left: desktop-vw(-14px);
+        margin-right: 0;
+      }
+    }
+
+    .seeAllWorksAnimated {
+      position: absolute;
+      left: 50vw;
+      bottom: 5vw;
+    }
+  }
+
+  .jdSmileyContainer {
+    @include dims(100%, 45vw);
+    margin-bottom: -22.5vw;
+    position: relative;
+
+    .seeAllWorkBtnC {
+      @include position(absolute, -7%, auto, auto, 57%);
+      transform: rotate(7deg);
+
+      .seeAllWorkBtn {
+        background: #fff;
+        border-radius: 14px;
+        border: 1px solid #000;
+        padding: 0.5rem 4rem;
+
+        @include hover {
+          &:hover {
+            background: #d9ff51;
+          }
+        }
+
+        .btnText {
+          color: #000;
+          font-family: VanguardCF-Medium;
+          font-size: 2.5vw;
+          margin: 0;
+          transform: translateY(-0.2ch);
+          white-space: nowrap;
+        }
+      }
+
+      .bg {
+        @include position(absolute, 25%, auto, auto, 5%);
+        @include dims(100%);
+        border-radius: 14px;
+        background: #000;
+        z-index: -1;
+      }
+    }
+
+    .smileyContainer {
+      @include position(absolute, 0, auto, auto, 50%);
+      @include dims(50vw, auto);
+      transform: translate(-70%, 20%);
+
+      .jdSmiley {
+        @include dims(100%);
+        display: block;
+        object-fit: contain;
+        pointer-events: none;
+      }
+    }
+
+    .arrowContainer {
+      @include position(absolute, 7%, auto, auto, 57%);
+      @include dims(10vw, auto);
+      transform: rotate(10deg);
+
+      .arrow {
+        @include dims(100%);
+        display: block;
+        object-fit: contain;
+      }
+    }
+  }
+}

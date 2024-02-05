@@ -1,0 +1,10 @@
+.footerReveal {
+  position: relative;
+
+  .overlay {
+    @include position(absolute, 0, 0, 0, 0);
+    background: var(--black);
+    pointer-events: none;
+    opacity: 1;
+  }
+}

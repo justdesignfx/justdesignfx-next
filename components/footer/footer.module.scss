@@ -1,0 +1,762 @@
+.revealWrapper {
+  position: relative;
+  will-change: transform;
+  z-index: z-index("footer");
+
+  .overlay {
+    @include position(absolute, 0, 0, 0, 0);
+    @include dims(100%);
+    background: #000000;
+    pointer-events: none;
+    z-index: z-index("footerOverlay");
+  }
+
+  .copyright {
+    padding: 6vw 4vw 4vw 4vw;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    @include mobile {
+      flex-direction: column-reverse;
+      justify-content: center;
+      gap: 7vw;
+    }
+
+    @include mobile {
+      margin-bottom: 5vw;
+    }
+
+    .text {
+      color: #fff;
+      display: inline-block;
+      font-family: VisbyCF-Regular;
+      font-size: 1rem;
+      letter-spacing: 100%;
+      text-align: left;
+
+      @include mobile {
+        text-align: center;
+      }
+
+      @include mobile {
+        font-size: 14px;
+      }
+    }
+
+    .links {
+      margin-left: auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4vw;
+
+      @include mobile {
+        margin-left: 0;
+      }
+
+      @include mobile {
+        margin-bottom: 0;
+      }
+
+      .link {
+        color: #fff;
+        font-family: VisbyCF-Regular;
+        font-size: 1rem;
+        letter-spacing: 100%;
+
+        &:nth-child(1),
+        &:nth-child(2) {
+          text-decoration: underline;
+          text-decoration-color: #b1b1b1;
+          cursor: pointer;
+
+          @include mobile {
+            text-decoration-color: #b1b1b1;
+          }
+        }
+      }
+    }
+
+    .social {
+      display: flex;
+      align-items: center;
+      gap: 4vw;
+      margin: 0;
+      margin-left: 10vw;
+
+      @include mobile {
+        margin-left: 0;
+      }
+
+      @include mobile {
+        gap: 15vw;
+      }
+
+      .icon {
+        height: 2rem;
+      }
+    }
+  }
+
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+
+    @include mobile {
+      justify-content: center;
+      margin-top: 0;
+    }
+
+    @include mobile {
+      width: fit-content;
+      flex-direction: column;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn {
+      width: 12vw;
+      padding: 0.65rem 0;
+      background: transparent;
+      box-shadow: 0 0 0 1pt #ffffff75;
+      outline: none;
+      border-radius: 28px;
+      text-decoration: none;
+      cursor: none;
+
+      // @include devicesMin(aboveTablet) {
+      //   &:hover {
+      //     background: #d9ff51;
+      //     box-shadow: 0 0 0 1pt #d9ff51;
+      //     outline: none;
+
+      //     .btnText {
+      //       color: #000000;
+      //     }
+      //   }
+      // }
+
+      @include mobile {
+        width: 22vw;
+      }
+
+      @include mobile {
+        width: 50vw;
+      }
+
+      .btnText {
+        color: #f8f9fa;
+        font-family: VisbyCF-Medium;
+        font-size: 1.25vw;
+        line-height: 100%;
+        margin: 0;
+        white-space: nowrap;
+        cursor: none;
+
+        @include mobile {
+          font-size: 2.5vw;
+        }
+
+        @include mobile {
+          font-size: 4vw;
+        }
+      }
+    }
+
+    .btnGetDirection {
+      background: transparent;
+      box-shadow: 0 0 0 1pt #ffffff75;
+      border-radius: 28px;
+      cursor: none;
+      outline: none;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+
+      // @include devicesMin(aboveTablet) {
+      //   &:hover {
+      //     background: #d9ff51;
+      //     box-shadow: 0 0 0 1pt #d9ff51;
+      //     outline: none;
+
+      //     .btnText {
+      //       color: #000000;
+      //     }
+
+      //     .arrowW {
+      //       * {
+      //         path {
+      //           fill: #000;
+      //         }
+      //       }
+      //     }
+      //   }
+      // }
+
+      @include mobile {
+        padding: 0.5rem 1rem;
+      }
+
+      .btnText {
+        color: #f8f9fa;
+        cursor: none;
+        font-family: VisbyCF-Medium;
+        font-size: 14px;
+        line-height: 100%;
+        transform: translateY(0.1ch);
+        white-space: nowrap;
+
+        @include mobile {
+          font-size: 14px;
+        }
+
+        @include mobile {
+          font-size: 4vw;
+        }
+      }
+
+      .arrowW {
+        margin-left: 0.5rem;
+      }
+    }
+  }
+
+  // DEFAULT FOOTER STYLES
+  .footerMain {
+    background: #000;
+
+    .subscribe {
+      padding: 4vw 4vw 2vw 4vw;
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      @include mobile {
+        padding: 10vw 8vw 10vw 8vw;
+      }
+
+      &::after {
+        content: "";
+        @include dims(92vw, 1px);
+        @include position(absolute, auto, 0, 0, 50%);
+        background: #171717;
+        transform: translateX(-50%);
+      }
+
+      .formWrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .inputGroup {
+          @include dims(100%, auto);
+          position: relative;
+
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+
+          .inputLabel {
+            color: #f2f2f2;
+            font-family: VanguardCF-Bold;
+            font-size: 2.25vw;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            text-align: left;
+
+            @include mobile {
+              font-size: 10vw;
+              text-align: center;
+              margin: 7vw auto;
+            }
+
+            br {
+              display: none;
+
+              @include mobile {
+                display: block;
+              }
+            }
+          }
+
+          .input {
+            @include dims(35vw, 4.5vw);
+            background: transparent;
+            border-radius: 66px;
+            border: 1px solid #b1b1b1;
+            color: #f2f2f2;
+            font-family: VisbyCF-Medium;
+            font-size: 24px;
+            outline: none;
+            padding: 0 2.5vw;
+
+            @include mobile {
+              @include dims(100%, 15vw);
+              text-align: center;
+            }
+
+            &::placeholder {
+              color: #707070;
+              font-family: VisbyCF-Regular;
+              font-size: 20px;
+            }
+
+            &:focus {
+              font-family: VisbyCF-Medium;
+
+              @include mobile {
+                font-size: 20px;
+              }
+            }
+          }
+
+          .subscribeError {
+            @include position(absolute, 60%, auto, auto, 105%);
+            @include dims(22vw, auto);
+
+            @include mobile {
+              display: none;
+            }
+
+            .errText {
+              font-family: VisbyCF-Regular;
+              font-size: 0.8vw;
+              line-height: 160%;
+              color: #ffffff;
+              opacity: 0.8;
+            }
+          }
+        }
+
+        .privacyCheck {
+          margin-top: 1.5vw;
+          padding-left: 2.5vw;
+
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+
+          @include mobile {
+            @include dims(100%, auto);
+            margin: 5vw auto 0 auto;
+          }
+
+          .radioWrapper {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1vw;
+
+            .customRadio {
+              $dim: 24px;
+              @include dims($dim);
+              border-radius: 8px;
+              border: 1px solid #b1b1b1;
+              flex-shrink: 0;
+              position: relative;
+
+              @include mobile {
+                border-radius: 6px;
+              }
+
+              .inner {
+                @include dims($dim - 5px);
+                border-radius: 4px;
+                background: #ffffff;
+
+                @include mobile {
+                  @include dims($dim - 6px);
+                }
+              }
+            }
+
+            .radioText {
+              color: #f2f2f2;
+              font-family: VisbyCF-Regular;
+              font-size: 0.85rem;
+              line-height: 180%;
+              opacity: 0.6;
+
+              @include mobile {
+                font-size: 12px;
+                line-height: 160%;
+                text-align: left;
+              }
+
+              br {
+                @include mobile {
+                  display: none;
+                }
+              }
+            }
+          }
+
+          .sendBtn {
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-family: VisbyCF-DemiBold;
+            font-size: 2vw;
+            line-height: 180%;
+            margin: 0;
+            padding: 0;
+
+            @include mobile {
+              font-size: 10vw;
+              margin: 0 auto;
+            }
+          }
+        }
+
+        .sendEmailBtn {
+          text-align: left;
+          font-family: VanguardCF-Medium;
+          font-size: 40px;
+          font-weight: 400;
+          line-height: 80%;
+          color: #f2f2f2;
+          text-decoration: none;
+          transform: translateY(-3px);
+          border: none;
+          background: transparent;
+          cursor: pointer;
+        }
+      }
+
+      .scrollToTop {
+        @include dims(8vw);
+        margin-top: 7vw;
+        transform: translateZ(0px);
+
+        #Group_1828 {
+          #Path_5402,
+          #Path_5401,
+          #Path_5398,
+          #Path_5400,
+          #Path_5399 {
+            transition: 0.4s all ease;
+          }
+        }
+
+        @include desktop {
+          cursor: none;
+          will-change: transform;
+          transition: 0.3s all ease;
+
+          g path#Path_5402,
+          #Path_5401,
+          #Path_5398,
+          #Path_5400,
+          #Path_5399 {
+            transition: 0.4s all ease;
+          }
+
+          &:hover {
+            transform: translateY(-20%);
+
+            // eyes
+            #Path_5402,
+            #Path_5401 {
+              transform: translateY(-10%);
+            }
+
+            // mouth
+            #Path_5398,
+            #Path_5400,
+            #Path_5399 {
+              transform: translateY(-12%);
+            }
+          }
+        }
+      }
+    }
+
+    .contact {
+      padding: 5vw 4vw 0 4vw;
+
+      display: flex;
+      align-items: flex-start;
+
+      @include mobile {
+        padding: 15vw 2.5vw 0 2.5vw;
+      }
+
+      .sayHi {
+        font-family: VanguardCF-Bold;
+        font-size: 2vw;
+        margin: 0 0 2rem 0;
+        color: #f8f9fa;
+        transform: translateY(-0.2ch);
+
+        @include mobile {
+          font-size: 15vw;
+        }
+      }
+
+      .addressTitle {
+        font-family: VisbyCF-DemiBold;
+        font-size: 1.1vw;
+        margin: 0 0 1.5vw 0;
+        color: #f8f9fa;
+
+        @include mobile {
+          font-size: 5vw;
+        }
+      }
+
+      .text {
+        color: #b1b1b1;
+        font-family: VisbyCF-Regular;
+        font-size: 18px;
+        line-height: 160%;
+        margin-bottom: 2vw;
+
+        @include mobile {
+          text-align: center;
+          font-size: 1rem;
+          margin-left: auto;
+          margin-right: auto;
+          margin-bottom: 10vw;
+          width: 95%;
+
+          br {
+            display: none;
+          }
+        }
+      }
+
+      .textSm {
+        color: #b1b1b1;
+        font-family: VisbyCF-Regular;
+        font-size: 1rem;
+        line-height: 160%;
+        margin-bottom: 2.75vw;
+
+        @include mobile {
+          text-align: center;
+          font-size: 15px;
+          line-height: 36px;
+          width: 85%;
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
+
+      .col {
+        // TODO: ipad pro button styles
+        flex-shrink: 0;
+
+        @include mobile {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 15vw;
+          justify-content: center;
+          width: 100%;
+          margin-bottom: 25vw;
+        }
+
+        &:nth-child(1) {
+          @include mobile {
+            width: 100%;
+          }
+        }
+
+        &:nth-child(2) {
+          margin-left: 13.5vw;
+          margin-top: 1vw;
+
+          @include mobile {
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+          }
+
+          @include mobile {
+            width: 100%;
+
+            p {
+              br {
+                display: none;
+              }
+            }
+          }
+        }
+
+        &:nth-child(3) {
+          margin-left: 9.25vw;
+          margin-top: 1vw;
+
+          @include mobile {
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+.subscribeSuccess {
+  @include dims(40vw, 35vw);
+  background: #f2f2f2;
+  border: 10px solid #d9ff51;
+  border-radius: 32px;
+  margin-top: 10vw;
+  padding: 0 6vw 1vw 6vw;
+  position: relative;
+
+  @include mobile {
+    @include dims(90vw, auto);
+    border: 3px solid #d9ff51;
+    padding: 0 0 4vw 0;
+  }
+
+  .welcomeAboard {
+    @include dims(22vw, auto);
+    margin-bottom: -5.5vw;
+    z-index: 10;
+
+    @include mobile {
+      @include dims(50vw, auto);
+      margin-bottom: -15vw;
+    }
+  }
+
+  .title {
+    color: #000000;
+    font-family: VanguardCF-Bold;
+    font-size: 4vw;
+    margin-bottom: 1vw;
+    text-align: center;
+
+    @include mobile {
+      font-size: 10vw;
+      margin-bottom: 4vw;
+    }
+  }
+
+  .text {
+    color: #000000;
+    font-family: VisbyCF-Medium;
+    font-size: 1.5vw;
+    margin-bottom: 2vw;
+    text-align: center;
+
+    @include mobile {
+      font-size: 3.5vw;
+      margin-bottom: 6vw;
+    }
+  }
+
+  .doneButton {
+    border: 1px solid #000;
+    border-radius: 32px;
+    color: #000000;
+    font-family: VanguardCF-Medium;
+    font-size: 2.25vw;
+    padding: 0.25rem 6rem 0.5rem 6rem;
+
+    @include mobile {
+      font-size: 7vw;
+      padding: 0.15rem 4rem 0.25rem 4rem;
+    }
+  }
+}
+
+.copyright {
+  padding: 4vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  @include mobile {
+    flex-direction: column-reverse;
+    justify-content: center;
+    gap: 7vw;
+  }
+
+  @include mobile {
+    margin-bottom: 5vw;
+  }
+
+  .text {
+    color: #fff;
+    display: inline-block;
+    font-family: VisbyCF-Regular;
+    font-size: 1rem;
+    letter-spacing: 100%;
+    text-align: left;
+
+    @include mobile {
+      font-size: 14px;
+    }
+  }
+
+  .links {
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4vw;
+
+    @include mobile {
+      margin-bottom: 0;
+      margin-left: 0;
+    }
+
+    .link {
+      color: #fff;
+      font-family: VisbyCF-Regular;
+      font-size: 1rem;
+      letter-spacing: 100%;
+
+      @include mobile {
+        font-size: 1rem;
+      }
+
+      &:nth-child(1),
+      &:nth-child(2) {
+        text-decoration: underline;
+        text-decoration-color: #ffffff75;
+        cursor: pointer;
+
+        @include mobile {
+          text-decoration-color: #ffffff75;
+        }
+      }
+    }
+  }
+
+  .social {
+    display: flex;
+    align-items: center;
+    gap: 4vw;
+    margin: 0;
+    margin-left: 10vw;
+
+    @include mobile {
+      margin-left: 0;
+    }
+
+    @include mobile {
+      gap: 15vw;
+    }
+
+    .icon {
+      height: 2rem;
+    }
+  }
+}

@@ -9,19 +9,35 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "14.0.4"
+    "@gsap/react": "^2.1.0",
+    "@react-three/drei": "^9.97.0",
+    "@react-three/fiber": "^8.15.16",
+    "@studio-freight/lenis": "^1.0.34",
+    "@uidotdev/usehooks": "^2.4.1",
+    "axios": "^1.6.7",
+    "clsx": "^2.1.0",
+    "i18next": "^23.7.16",
+    "next": "14.0.4",
+    "next-i18next": "^15.2.0",
+    "next-seo": "^6.4.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^14.0.0",
+    "react-query": "^3.39.3",
+    "sass": "^1.69.7",
+    "three": "^0.161.0",
+    "usehooks-ts": "^2.10.0",
+    "zustand": "^4.5.0"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.4"
+    "typescript": "^5"
   }
 }

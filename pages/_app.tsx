@@ -1,6 +1,13 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import "../styles/global.scss"
+
+import { SmoothLayout } from "@/layouts/smooth"
+
+import type { AppProps } from "next/app"
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <SmoothLayout>
+      <Component {...pageProps} />
+    </SmoothLayout>
+  )
 }

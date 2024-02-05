@@ -1,0 +1,59 @@
+@import "./utils.scss";
+
+.cardWork {
+  @include dims(100%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .mediaC {
+    @include dims(100%);
+    background: var(--kingly-cloud);
+    border-radius: desktop-vw(20px);
+    overflow: hidden;
+    position: relative;
+
+    .award {
+      @include position(absolute, auto, desktop-vw(8px), desktop-vw(8px), auto);
+      @include dims(desktop-vw(150px), auto);
+      z-index: 10;
+      border-radius: desktop-vw(16px);
+    }
+  }
+
+  .cardTitle {
+    color: var(--black);
+    font-family: var(--font-vanguard-cf);
+    font-size: desktop-vw(50px);
+    font-weight: 500;
+    text-align: left;
+    margin-bottom: desktop-vw(16px);
+  }
+
+  .cardTag {
+    border: 1px solid var(--westchester-grey);
+    border-radius: desktop-vw(16px);
+    color: var(--black);
+    font-family: var(--font-visby-cf);
+    font-size: desktop-vw(12px);
+    padding: desktop-vw(6px) desktop-vw(16px);
+    text-transform: uppercase;
+
+    .seperator {
+      padding: 0 0.5rem;
+      font-family: var(--font-vanguard-cf);
+    }
+  }
+
+  &.v2 {
+    align-items: center;
+
+    .cardTitle {
+      font-family: var(--font-visby-cf);
+      font-size: desktop-vw(25px);
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: unset;
+    }
+  }
+}
