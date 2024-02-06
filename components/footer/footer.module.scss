@@ -131,8 +131,8 @@
 
       // @include devicesMin(aboveTablet) {
       //   &:hover {
-      //     background: #d9ff51;
-      //     box-shadow: 0 0 0 1pt #d9ff51;
+      //     background: var(--isotonic-water);
+      //     box-shadow: 0 0 0 1pt var(--isotonic-water);
       //     outline: none;
 
       //     .btnText {
@@ -179,8 +179,8 @@
 
       // @include devicesMin(aboveTablet) {
       //   &:hover {
-      //     background: #d9ff51;
-      //     box-shadow: 0 0 0 1pt #d9ff51;
+      //     background: var(--isotonic-water);
+      //     box-shadow: 0 0 0 1pt var(--isotonic-water);
       //     outline: none;
 
       //     .btnText {
@@ -610,7 +610,7 @@
 .subscribeSuccess {
   @include dims(40vw, 35vw);
   background: #f2f2f2;
-  border: 10px solid #d9ff51;
+  border: 10px solid var(--isotonic-water);
   border-radius: 32px;
   margin-top: 10vw;
   padding: 0 6vw 1vw 6vw;
@@ -618,7 +618,7 @@
 
   @include mobile {
     @include dims(90vw, auto);
-    border: 3px solid #d9ff51;
+    border: 3px solid var(--isotonic-water);
     padding: 0 0 4vw 0;
   }
 

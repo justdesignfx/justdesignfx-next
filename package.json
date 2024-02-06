@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.0",
+    "@madeinhaus/nextjs-page-transition": "^3.1.1",
     "@react-three/drei": "^9.97.0",
     "@react-three/fiber": "^8.15.16",
     "@studio-freight/lenis": "^1.0.34",

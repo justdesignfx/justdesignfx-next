@@ -15,10 +15,6 @@ const Header = () => {
       </Link>
 
       <nav className="flex gap-10 ml-auto">
-        <Link className={s.link} href="/">
-          Home
-        </Link>
-
         <Link className={s.link} href="/works">
           Works
         </Link>

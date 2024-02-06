@@ -3,9 +3,12 @@ import s from "./about.module.scss"
 import { ScrollTrigger, gsap } from "@/lib/gsap"
 import { useGSAP } from "@gsap/react"
 import cx from "clsx"
-import { useRef } from "react"
+import { Fragment, useRef } from "react"
 
-import { all } from "@/api/queries/services"
+import { all as getServices } from "@/api/queries/services"
+import { all as getAwards } from "@/api/queries/awards"
+import { all as getTeamMembers } from "@/api/queries/team-members"
+
 import { Parallax } from "@/components/animations/parallax"
 import { IconArrowDown } from "@/components/icons/icon-arrow-down"
 import { Marquee } from "@/components/marquee"
@@ -21,6 +24,7 @@ import sun from "@/public/img/references-sun.svg"
 import teamBlob from "@/public/img/team-blob.png"
 import teamEyeUp from "@/public/img/team-eye-up.svg"
 import teamSmile from "@/public/img/team-smile.png"
+import { TeamMembers } from "@/components/team-members"
 
 interface Props {
   services: ServiceProps[]
@@ -30,7 +34,81 @@ interface Props {
 
 const About = (props: Props) => {
   const { services, awards, teamMembers } = props
+
+  const introRef = useRef(null)
   const preTeamRef = useRef(null)
+
+  // useGSAP(
+  //   () => {
+  //     const tl = gsap.timeline({ paused: true })
+
+  //     // tl.from(".we-are", {
+  //     //   duration: 0.8,
+  //     //   rotationX: 75,
+  //     //   stagger: 0.1,
+  //     //   transformOrigin: "top center",
+  //     //   z: -150,
+  //     //   opacity: 0,
+  //     // })
+  //     //   .from(".relentless", {
+  //     //     rotateY: -60,
+  //     //     scale: 0.5,
+  //     //     opacity: 0,
+  //     //     delay: -0.1,
+  //     //   })
+  //     //   .from(".dreamers", {
+  //     //     rotateY: -60,
+  //     //     scale: 0.5,
+  //     //     opacity: 0,
+  //     //     delay: -0.1,
+  //     //   })
+  //     //   .from(".vertical-left", {
+  //     //     opacity: 0,
+  //     //   })
+
+  //     // tl.play()
+
+  //     const weAreLetters = gsap.utils.toArray(".we-are-letter")
+  //     const justLetters = gsap.utils.toArray(".just-letter")
+  //     const relentlessLetters = gsap.utils.toArray(".relentless-letter")
+  //     const dreamersLetters = gsap.utils.toArray(".dreamers-letter")
+
+  //     tl.from(".we-are", {
+  //       duration: 0.8,
+
+  //       opacity: 0,
+  //     }).from(justLetters, {
+  //       duration: 0.8,
+  //       stagger: 0.1,
+  //       opacity: 0,
+  //     })
+  //     tl.from(".relentless", {
+  //       duration: 0.8,
+
+  //       opacity: 0,
+  //     })
+  //       .from(dreamersLetters, {
+  //         duration: 0.8,
+  //         stagger: 0.1,
+  //         opacity: 0,
+  //       })
+  //       .from(".vertical-left", {
+  //         duration: 0.5,
+  //         opacity: 0,
+  //       })
+  //     // .from(".blob", {
+  //     //   duration: 0.5,
+  //     //   opacity: 0,
+  //     // })
+  //     // .from(".smile", {
+  //     //   duration: 0.5,
+  //     //   opacity: 0,
+  //     // })
+
+  //     tl.play()
+  //   },
+  //   { scope: introRef }
+  // )
 
   useGSAP(
     () => {
@@ -63,38 +141,75 @@ const About = (props: Props) => {
           "We design iconic brands with future impact. JUST DESIGN FX is a future-focused brand and digital design agency with offices located in Istanbul and New York.",
       }}
     >
-      <section className={s.intro}>
+      <section className={cx(s.intro, "flex flex-col items-center")} ref={introRef}>
         <h1>
-          <span className="block">
-            WE ARE <span className={cx("inline", s.italic)}>just</span>
+          <span className="block we-are">
+            <span className="we-are-letter">W</span>
+            <span className="we-are-letter">E</span>
+            <span className="we-are-letter invisible">E</span>
+            <span className="we-are-letter">A</span>
+            <span className="we-are-letter">R</span>
+            <span className="we-are-letter">E</span>
+            <span className="letter invisible">E</span>
+            <span className={cx("inline", s.italic)}>
+              <span className="just-letter">j</span>
+              <span className="just-letter">u</span>
+              <span className="just-letter">s</span>
+              <span className="just-letter">t</span>
+            </span>
           </span>
-          <span className="block">RELENTLESS</span>
-          <span className={cx("block", s.italic)}>dreamers.</span>
+          <span className="block relentless">
+            <span className="relentless-letter">R</span>
+            <span className="relentless-letter">E</span>
+            <span className="relentless-letter">L</span>
+            <span className="relentless-letter">E</span>
+            <span className="relentless-letter">N</span>
+            <span className="relentless-letter">T</span>
+            <span className="relentless-letter">L</span>
+            <span className="relentless-letter">E</span>
+            <span className="relentless-letter">S</span>
+            <span className="relentless-letter">S</span>
+          </span>
+          <span className={cx("block", "dreamers", s.italic)}>
+            <span className="dreamers-letter">d</span>
+            <span className="dreamers-letter">r</span>
+            <span className="dreamers-letter">e</span>
+            <span className="dreamers-letter">a</span>
+            <span className="dreamers-letter">m</span>
+            <span className="dreamers-letter">e</span>
+            <span className="dreamers-letter">r</span>
+            <span className="dreamers-letter">s</span>
+            <span className="dreamers-letter">.</span>
+          </span>
         </h1>
 
-        <div className={s.flyingTextWrapper}>
-          <small>
-            <span className={s.newLine}>
+        <div className={cx(s.flyingTextC, "flex items-center justify-between")}>
+          <p className="text-left">
+            <span>
               We design iconic brands with future impact.<span className={s.emoji}>🚀</span>
             </span>
-            JUST DESIGN FX
-            <sup>®</sup> is a new generation awarded branding and web design agency that specializes in creating the
-            best possible brand experience for business owners and target users.
-          </small>
-          <small>
-            At JUST DESIGN FX<sup>®</sup>, we work collaboratively with clients from all over the world. Our working
-            methodology involves analyzing a brand’s current position, understanding its design and marketing needs, and
-            envisioning its best future.
-            <span className={s.newLine}>Our offices are currently located in Istanbul and New York.</span>
-          </small>
+            <span>
+              JUST DESIGN FX
+              <sup>®</sup> is a new generation awarded branding and web design agency that specializes in creating the
+              best possible brand experience for business owners and target users.
+            </span>
+          </p>
+          <p className="text-right">
+            <span>
+              At JUST DESIGN FX<sup>®</sup>, we work collaboratively with clients from all over the world. Our working
+              methodology involves analyzing a brand’s current position, understanding its design and marketing needs,
+              and envisioning its best future.
+            </span>
+            <span>Our offices are currently located in Istanbul and New York.</span>
+          </p>
         </div>
 
-        <div className={s.verticalTextLeft}>
+        <div className={cx(s.verticalTextLeft, "vertical-left")}>
           <Img src={allServices} alt="A Full Services Creative Studio Text" />
         </div>
 
         <div className={s.verticalTextRight}>
-          <h6>THE FUTURE IS NEAR.</h6>
+          <small>THE FUTURE IS NEAR.</small>
           <div className={s.iconC}>
             <IconArrowDown fill="var(--white)" />
           </div>
@@ -104,18 +219,26 @@ const About = (props: Props) => {
           <IconArrowDown fill="var(--white)" />
         </div>
 
-        <Img className={s.teamBlob} src={teamBlob} alt="Water Blob" />
+        <div className={cx(s.blob, "blob")}>
+          <Parallax speedX={0} speedY={-0.5}>
+            <Img src={teamBlob} alt="Water Blob" />
+          </Parallax>
+        </div>
 
-        <Img className={s.teamSmile} src={teamSmile} alt="Smiley" />
+        <div className={cx(s.smile, "smile")}>
+          <Parallax speedX={0} speedY={-0.25}>
+            <Img src={teamSmile} alt="Smiley" />
+          </Parallax>
+        </div>
 
-        <Parallax speedX={0} speedY={-1}>
-          <div className={s.whatWeDo}>
-            <h2>
+        <div className={s.whatWeDo}>
+          <Parallax speedX={0} speedY={-1.25}>
+            <h2 className="text-center">
               WHAT
               <br /> WE DO.
             </h2>
-          </div>
-        </Parallax>
+          </Parallax>
+        </div>
       </section>
 
       <section className={s.fields}>
@@ -151,7 +274,7 @@ const About = (props: Props) => {
       <section className={s.awards}>
         <h3>AWARDS</h3>
 
-        <div className={s.table}>
+        <div className={cx(s.table, "desktop-only")}>
           <div className={cx(s.row, s.title)}>
             <h5 className={s.text}>Award</h5>
             <h5 className={s.text}>Project & Category</h5>
@@ -159,37 +282,33 @@ const About = (props: Props) => {
 
           {awards.map((award) => {
             return (
-              <>
+              <Fragment key={award.id}>
                 {award.url ? (
-                  <a href={award.url} target="_blank" rel="noreferrer" key={award.id}>
-                    <div className={cx(s.row, s.item)} key={award.id}>
-                      <Img className={s.trophy} src={award.image} alt="Trophy" />
-                      <h5 className={s.text}>{award.title}</h5>
-                      <h5 className={s.text}>{award.category}</h5>
-                      {award.url && <h5 className={s.link}>View Case</h5>}
-                    </div>
-                  </a>
+                  <Link className={cx(s.row, s.item)} href={award.url} target="_blank" rel="noreferrer">
+                    <Img className={s.trophy} src={award.image} alt="Trophy" height={200} width={200} />
+                    <h5 className={s.text}>{award.title}</h5>
+                    <h5 className={s.text}>{award.category}</h5>
+                    {award.url && <h5 className={s.link}>View Case</h5>}
+                  </Link>
                 ) : (
-                  <div key={award.id}>
-                    <div className={cx(s.row, s.item)} key={award.id}>
-                      <Img className={s.trophy} src={award.image} alt="Trophy" />
-                      <h5 className={s.text}>{award.title}</h5>
-                      <h5 className={s.text}>{award.category}</h5>
-                    </div>
+                  <div className={cx(s.row, s.item)}>
+                    <Img className={s.trophy} src={award.image} alt="Trophy" height={200} width={200} />
+                    <h5 className={s.text}>{award.title}</h5>
+                    <h5 className={s.text}>{award.category}</h5>
                   </div>
                 )}
-              </>
+              </Fragment>
             )
           })}
         </div>
 
-        <div className={s.tableMobile}>
+        <div className={cx(s.tableMobile, "mobile-only")}>
           {awards?.map((award) => {
             return (
-              <>
+              <Fragment key={award.id}>
                 {award.url ? (
-                  <a href={award.url} target="_blank" rel="noreferrer" key={award.id}>
-                    <Img className={s.trophy} src={award.image} alt="Trophy" />
+                  <a href={award.url} target="_blank" rel="noreferrer">
+                    <Img className={s.trophy} src={award.image} alt="Trophy" height={200} width={200} />
                     <div className={cx(s.row, s.title)}>
                       <h5 className={s.text}>Award</h5>
                       <h5 className={s.text}>{award.title}</h5>
@@ -204,8 +323,8 @@ const About = (props: Props) => {
                     </div>
                   </a>
                 ) : (
-                  <div key={award.id}>
-                    <Img className={s.trophy} src={award.image} alt="Trophy" />
+                  <div>
+                    <Img className={s.trophy} src={award.image} alt="Trophy" height={200} width={200} />
                     <div className={cx(s.row, s.title)}>
                       <h5 className={s.text}>Award</h5>
                       <h5 className={s.text}>{award.title}</h5>
@@ -216,7 +335,7 @@ const About = (props: Props) => {
                     </div>
                   </div>
                 )}
-              </>
+              </Fragment>
             )
           })}
 
@@ -305,6 +424,8 @@ const About = (props: Props) => {
           <Rocket className={s.rocket} />
         </div> */}
       </section>
+
+      <TeamMembers items={teamMembers} />
     </DefaultLayout>
   )
 }
@@ -312,9 +433,9 @@ const About = (props: Props) => {
 export default About
 
 export async function getStaticProps() {
-  const services = await all()
-  const awards = await all()
-  const teamMembers = await all()
+  const services = await getServices()
+  const awards = await getAwards()
+  const teamMembers = await getTeamMembers()
 
   return { props: { awards, services, teamMembers } }
 }

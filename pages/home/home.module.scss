@@ -161,7 +161,7 @@
 
         @include hover {
           &:hover {
-            background: #d9ff51;
+            background: var(--isotonic-water);
           }
         }
 
