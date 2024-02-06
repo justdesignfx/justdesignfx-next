@@ -14,7 +14,7 @@ const Header = () => {
         <Img className="object-contain" alt="JUST DESIGN FX Logo" src={logo} />
       </Link>
 
-      <nav className="flex gap-10">
+      <nav className="flex gap-10 ml-auto">
         <Link className={s.link} href="/">
           Home
         </Link>
