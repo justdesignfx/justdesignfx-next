@@ -1,0 +1,942 @@
+.intro {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @include mobile {
+    padding: 17vw;
+  }
+
+  > h1 {
+    color: var(--white);
+    width: desktop-vw(800px);
+    font-size: desktop-vw(144px);
+    font-family: var(--font-vanguard-cf);
+    font-weight: 900;
+
+    @include mobile {
+      font-size: 20vw;
+
+      br {
+        display: inline-block;
+      }
+    }
+
+    > span {
+      &:nth-child(1) {
+        text-align: left;
+
+        @include mobile {
+          font-size: desktop-vw(300px);
+          text-align: center;
+          margin-bottom: 5vw;
+        }
+      }
+
+      &:nth-child(2) {
+        text-align: right;
+        transform: translateY(-1vw);
+
+        @include mobile {
+          font-size: 19vw;
+          transform: translateY(0);
+          text-align: center;
+        }
+      }
+
+      &:nth-child(3) {
+        margin-right: 9vw;
+        text-align: right;
+        transform: translateY(-3vw);
+
+        @include mobile {
+          transform: translateY(-1vw);
+          text-align: center;
+          margin-right: 0;
+        }
+      }
+    }
+
+    .italic {
+      font-family: var(--font-ageya-oblique);
+      font-weight: 100;
+    }
+  }
+
+  .flyingTextWrapper {
+    @include dims(55vw, auto);
+    padding-top: 5vw;
+    margin-left: 5vw;
+    transform: translateX(-10vw);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include mobile {
+      width: 100vw;
+      padding-top: 20vw;
+      flex-direction: column;
+      transform: translateX(0);
+      margin: 0;
+    }
+
+    small {
+      @include dims(22vw, auto);
+      color: var(--white);
+      display: block;
+      font-family: VisbyCF-DemiBold;
+      font-size: 1.1vw;
+      line-height: 200%;
+
+      @include mobile {
+        @include dims(90vw, auto);
+        font-weight: 700;
+        font-size: 18px;
+      }
+
+      &:nth-child(1) {
+        text-align: left;
+
+        @include mobile {
+          text-align: center;
+        }
+      }
+
+      &:nth-child(2) {
+        text-align: right;
+        margin-top: 15vw;
+        max-width: 23ch;
+        transform: translateY(5vw);
+
+        @include mobile {
+          margin-top: 0;
+          text-align: center;
+          max-width: none;
+        }
+      }
+
+      .newLine {
+        display: block;
+        font-family: VisbyCF-DemiBold;
+        font-weight: 700;
+        margin: 1rem 0;
+      }
+
+      .emoji {
+        padding: 0 0.5rem;
+      }
+    }
+  }
+
+  .verticalTextLeft {
+    position: absolute;
+    top: 18vw;
+    left: 5vw;
+
+    @include mobile {
+      display: none;
+    }
+  }
+
+  .verticalTextRight {
+    @include position(absolute, desktop-vw(1000px), desktop-vw(50px), auto, auto);
+
+    @include mobile {
+      display: none;
+    }
+
+    h6 {
+      color: var(--white);
+      font-family: var(--font-vanguard-cf);
+      font-weight: 100;
+      font-size: desktop-vw(40px);
+      writing-mode: vertical-rl;
+      white-space: nowrap;
+
+      @include mobile {
+        display: none;
+        // font-size: 10vw;
+      }
+    }
+
+    .iconC {
+      @include dims(100%, auto);
+
+      @include mobile {
+        width: 8vw;
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  .downArrowMobile {
+    display: none;
+
+    @include mobile {
+      display: block;
+      margin-top: 20vw;
+    }
+  }
+
+  .teamBlob {
+    @include position(absolute, desktop-vw(30px), 0, auto, auto);
+    @include dims(desktop-vw(800px), auto);
+
+    @include mobile {
+      top: 9.5%;
+      width: 95vw;
+    }
+  }
+
+  .teamSmile {
+    @include position(absolute, desktop-vw(30px), desktop-vw(200px), auto, auto);
+    @include dims(desktop-vw(200px), auto);
+
+    @include mobile {
+      top: 12%;
+      right: -4vw;
+      width: 25vw;
+    }
+  }
+}
+
+.whatWeDo {
+  @include dims(100vw, auto);
+  position: relative;
+  color: var(--white);
+  padding: 10vw 0 0.5vw 0;
+  z-index: -5;
+
+  @include mobile {
+    padding: 10vw 0 0 0;
+  }
+
+  br {
+    display: none;
+
+    @include mobile {
+      display: block;
+    }
+  }
+
+  h2 {
+    display: block;
+    font-size: desktop-vw(250px);
+    line-height: 100%;
+    font-family: var(--font-vanguard-cf);
+    font-weight: 700;
+    text-align: center;
+    transform: translateY(100%);
+    width: 100%;
+
+    @include mobile {
+      font-size: 37vw;
+      line-height: 90%;
+      transform: translateY(0);
+    }
+  }
+}
+
+.fields {
+  background: var(--white);
+  border-radius: desktop-vw(64px);
+  position: relative;
+  display: flex;
+
+  @include mobile {
+    border-radius: 28px;
+    padding: 15vw 2vw;
+
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  &:before {
+    content: "";
+    @include position(absolute, 0, 0, auto, 0);
+    @include dims(100%, 350px);
+    background: linear-gradient(0deg, #000, rgb(255, 255, 255, 0));
+    transform: translateY(-50%);
+    z-index: -1;
+  }
+
+  .items {
+    position: relative;
+
+    &:before {
+      content: "";
+      @include position(absolute, 50%, auto, auto, 50%);
+      @include dims(50%, 90%);
+      background-color: var(--black);
+      transform: translate(-50%, -50%);
+      z-index: 0;
+    }
+  }
+
+  .fieldCard {
+    @include dims(desktop-vw(570px), desktop-vw(450px));
+    background: var(--white);
+    border-radius: desktop-vw(48px);
+    padding: desktop-vw(20px);
+    z-index: 100;
+
+    .inner {
+      @include dims(100%);
+      background: var(--white);
+      border-radius: desktop-vw(48px);
+      border: 2px solid var(--black);
+      padding: desktop-vw(32px);
+      position: relative;
+
+      @include hover {
+        &:hover {
+          background: var(--black);
+
+          h5 {
+            color: var(--white);
+          }
+
+          .seeAllWorks {
+            visibility: visible;
+            margin-top: auto;
+            opacity: 1;
+          }
+
+          p {
+            visibility: hidden;
+          }
+        }
+      }
+    }
+
+    @include mobile {
+      @include dims(100%, auto);
+      border-radius: 24px;
+      padding: 7vw;
+    }
+
+    .index {
+      color: #000000;
+      font-family: var(--font-vanguard-cf);
+      font-weight: 400;
+      font-size: 1.8vw;
+      line-height: 100%;
+      margin-bottom: 0.5vw;
+      text-align: left;
+
+      @include mobile {
+        font-size: 7vw;
+        margin-bottom: 5vw;
+      }
+    }
+
+    .title {
+      color: #000000;
+      font-family: VanguardCF-Bold;
+      font-size: 4.5vw;
+      line-height: 100%;
+      text-align: left;
+
+      @include mobile {
+        font-size: 15vw;
+      }
+    }
+
+    .description {
+      color: #000000;
+      font-family: VisbyCF-Medium;
+      font-size: 1.1vw;
+      line-height: 200%;
+      margin-top: 2vw;
+      text-align: left;
+
+      @include mobile {
+        font-size: 4.75vw;
+        margin-top: 5vw;
+      }
+    }
+
+    .seeAllWorks {
+      @include position(absolute, auto, auto, desktop-vw(32px), desktop-vw(32px));
+
+      font-family: var(--font-vanguard-cf);
+      font-weight: 900;
+      color: var(--white);
+      font-size: desktop-vw(87px);
+
+      visibility: visible;
+      opacity: 0;
+
+      transition: 0.3s all ease;
+
+      @include mobile {
+        font-size: 15vw;
+        margin-top: 10vw;
+      }
+    }
+
+    .pin {
+      @include position(absolute, 95%, auto, auto, -11%);
+      @include dims(14%, auto);
+
+      @include mobile {
+        display: none;
+      }
+    }
+  }
+}
+
+.awards {
+  padding: 5vw 5vw 10vw 5vw;
+
+  @include mobile {
+    padding: 15vh 5vw 5vh 5vw;
+  }
+
+  > h3 {
+    color: var(--white);
+    font-size: desktop-vw(250px);
+    font-family: var(--font-vanguard-cf);
+    font-weight: 700;
+    margin-bottom: desktop-vw(100px);
+    text-align: left;
+
+    @include mobile {
+      font-size: 25vw;
+      margin-bottom: 10vh;
+      text-align: center;
+    }
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 25vw 1fr 5vw;
+
+    @include mobile {
+      grid-template-columns: auto;
+      grid-template-rows: auto 1fr;
+    }
+
+    &.title {
+      border-bottom: 1px solid var(--white);
+      padding: 1rem 0;
+
+      @include mobile {
+        border-bottom: none;
+      }
+    }
+
+    &.item {
+      border-bottom: 1px solid #ffffff41;
+      cursor: pointer;
+      padding: 3rem 0;
+      position: relative;
+
+      @include mobile {
+        border-bottom: none;
+        padding: 1rem 0;
+      }
+    }
+
+    .text,
+    .link {
+      color: var(--white);
+      cursor: pointer;
+      display: inline-block;
+      font-family: VisbyCF-Medium;
+      font-size: 1vw;
+      line-height: 100%;
+      text-align: left;
+
+      @include mobile {
+        font-size: 3vw;
+
+        &:nth-child(1) {
+          opacity: 0.4;
+          margin-bottom: 2vh;
+        }
+
+        &:nth-child(2) {
+          font-size: 4vw;
+          margin-bottom: 3vh;
+        }
+      }
+    }
+  }
+
+  .trophy {
+    height: 4vw;
+    width: 2.75vw;
+    object-fit: contain;
+
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) translateX(-150%);
+  }
+
+  .table {
+    padding-left: 13vw;
+    padding-right: 10vw;
+
+    @include mobile {
+      display: none;
+    }
+  }
+
+  .tableMobile {
+    border-bottom: 1px solid #ffffff41;
+    display: none;
+    position: relative;
+
+    @include mobile {
+      display: block;
+    }
+
+    .pentawardsLogo {
+      position: absolute;
+      right: 2.5vw;
+      bottom: 6vw;
+      width: 12vw;
+      transform: rotate(-20deg);
+    }
+  }
+}
+
+.references {
+  @include dims(100vw, auto);
+  position: relative;
+  overflow: hidden;
+
+  @include mobile {
+    padding: 10vw 0;
+  }
+
+  > h3 {
+    @include dims(desktop-vw(800px), auto);
+    color: var(--white);
+    font-family: var(--font-vanguard-cf);
+    font-size: desktop-vw(150px);
+    font-weight: 700;
+    margin-bottom: desktop-vw(200px);
+
+    @include mobile {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    small {
+      font-size: desktop-vw(64px);
+    }
+
+    .italic {
+      font-family: var(--font-ageya-oblique);
+      font-weight: 100;
+      text-align: right;
+    }
+  }
+
+  .imgC {
+    &.referencesSun {
+      @include position(absolute, desktop-vw(200px), auto, auto, desktop-vw(100px));
+      @include dims(desktop-vw(300px));
+
+      @include mobile {
+        @include position(relative, auto, auto, auto, auto);
+        @include dims(65vw, auto);
+        margin: 10vw 0;
+      }
+    }
+
+    &.companies {
+      @include dims(desktop-vw(800px), auto);
+
+      @include mobile {
+        display: none;
+      }
+    }
+  }
+
+  .companiesMobile {
+    flex-wrap: wrap;
+    gap: 4vw;
+    margin-top: 8vw;
+    display: none;
+
+    .logoWrapper {
+      @include dims(30vw, 15vw);
+
+      border: 1px solid var(--white) 46;
+      border-radius: 10px;
+      margin-bottom: 4vw;
+
+      @include mobile {
+        @include dims(40vw, 20vw);
+      }
+    }
+  }
+}
+
+.preTeam {
+  @include dims(100%, desktop-vw(900px));
+  overflow: hidden;
+  position: relative;
+
+  @include mobile {
+    @include dims(100%, auto);
+  }
+
+  .marqueeC {
+    width: 120vw;
+
+    &.white {
+      position: relative;
+      transform: rotate(9deg) translateX(-10vw) translateY(15vw);
+      z-index: 10;
+
+      @include mobile {
+        transform: rotate(9deg) translateY(20vw);
+      }
+    }
+
+    &.gray {
+      position: relative;
+      transform: rotate(-6deg) translateX(-10vw);
+      z-index: 5;
+
+      h3 {
+        span {
+          color: #101010;
+        }
+      }
+    }
+
+    h3 {
+      span {
+        color: var(--white);
+        font-family: var(--font-vanguard-cf);
+        font-weight: 700;
+        font-size: 12vw;
+        line-height: 100%;
+        white-space: nowrap;
+        display: inline-block;
+
+        @include mobile {
+          font-size: 25vw;
+        }
+
+        .inlineO {
+          font-family: var(--font-ageya-oblique);
+          font-weight: 100;
+          margin-left: desktop-vw(-40px);
+          margin-right: 0;
+        }
+      }
+
+      .rightMargin {
+        margin-right: 2.5rem;
+      }
+    }
+  }
+
+  .eyeC {
+    @include position(absolute, desktop-vw(400px), auto, auto, desktop-vw(300px));
+    transform: translateZ(100px);
+    z-index: 1000;
+
+    @include mobile {
+      @include position(relative, auto, auto, auto, auto);
+    }
+
+    .imgC {
+      @include dims(desktop-vw(160px), auto);
+      margin-bottom: desktop-vw(16px);
+    }
+
+    > small {
+      @include dims(100%, auto);
+      color: var(--white);
+      font-size: desktop-vw(32px);
+      font-family: var(--font-vanguard-cf);
+      text-align: center;
+
+      @include mobile {
+        font-size: 10vw;
+      }
+    }
+  }
+
+  .rocketWrapper {
+    position: absolute;
+    top: 24vw;
+    left: 60vw;
+    z-index: 100;
+    padding: 1rem;
+    transform: translateZ(100px);
+
+    @include mobile {
+      display: none;
+    }
+
+    .rocket {
+      @include mobile {
+        width: 3vw;
+      }
+    }
+  }
+
+  .bombWrapper {
+    position: absolute;
+    top: 5vw;
+    left: 40vw;
+    z-index: 7;
+
+    @include mobile {
+      display: none;
+    }
+
+    .bomb {
+      @include mobile {
+        width: 3vw;
+      }
+    }
+  }
+}
+
+.horizontalScroll {
+  background: #000000;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: hidden;
+
+  .progressBar {
+    @include position(fixed, auto, auto, 0, 0);
+    @include dims(100%, 2vw);
+    background: #d9ff51;
+    transform: translateZ(0);
+    transform-origin: left bottom;
+  }
+
+  .progressBar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    height: 12px;
+    background: #d9ff51;
+  }
+
+  .fixedElement {
+    display: flex;
+    position: fixed;
+    bottom: 2.5vw;
+    left: 10vw;
+
+    img {
+      width: 1vw;
+    }
+
+    p {
+      text-align: center;
+      letter-spacing: 0;
+      font-family: var(--font-vanguard-cf);
+      width: 100%;
+      color: var(--white);
+      font-size: 2.5vw;
+      line-height: 100%;
+      margin: 0;
+      padding-left: 1rem;
+      transform: skew(-10deg);
+      white-space: nowrap;
+      margin-right: 1vw;
+    }
+  }
+
+  .horizontalScrollItem {
+    @include dims(100vw, 100vh);
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-shrink: 0;
+
+    @include mobile {
+      align-items: center;
+    }
+  }
+
+  .slide1 {
+    //border: 1px solid orangered;
+    width: fit-content;
+  }
+}
+
+.memberCard {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2vw;
+
+  padding: 0 0 0 10vw;
+  background: #000000;
+
+  @include mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 90vw;
+    padding: 0 5vw 0 5vw;
+  }
+
+  .imgWrapper {
+    position: relative;
+
+    .memberPhoto {
+      @include dims(25vw, 30vw);
+      border-radius: 16px;
+      border: 2px solid var(--white);
+      flex-shrink: 0;
+      object-fit: cover;
+
+      @include mobile {
+        border-radius: 15vw;
+        width: 90vw;
+        height: 100vw;
+      }
+    }
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--white);
+
+    .credentials {
+      font-size: 4.8vw;
+      font-family: VanguardCF-Bold;
+      line-height: 100%;
+      margin: 0;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0;
+      width: 100%;
+
+      @include mobile {
+        font-size: 11vw;
+
+        br {
+          display: none;
+        }
+      }
+    }
+
+    .role {
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 32px;
+      position: relative;
+      font-family: VisbyCF-Medium;
+      font-size: 1rem;
+      line-height: 100%;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      padding: 0.75rem 1.5rem;
+
+      @include mobile {
+        font-size: 5.5vw;
+        margin-top: -1vw;
+      }
+    }
+
+    .linkedinLogo {
+      @include dims(1.75rem);
+    }
+  }
+
+  .emojiWrapper {
+    @include position(absolute, 0, 0, auto, auto);
+    transform: translate(50%, -50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include mobile {
+      transform: translate(50%, -40%);
+      right: 75vw;
+    }
+
+    .emojiBg {
+      @include dims(9vw);
+
+      @include mobile {
+        @include dims(35vw);
+      }
+    }
+
+    .emoji {
+      position: absolute;
+      @include dims(auto, 3vw);
+
+      @include mobile {
+        height: 15vw;
+      }
+    }
+  }
+
+  .keepScrooolling {
+    position: absolute;
+    right: 10vw;
+    bottom: 3vw;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    @include mobile {
+      display: none;
+    }
+
+    h6 {
+      color: var(--white);
+      font-family: var(--font-vanguard-cf);
+      font-weight: 100;
+      font-size: 1.5vw;
+      line-height: 100%;
+      margin: 0;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .downArrow {
+      transform: rotate(-90deg);
+      width: 1.5vw;
+    }
+  }
+}
+
+.social {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25vw;
+  margin-top: 1vw;
+
+  @include mobile {
+    gap: 7vw;
+  }
+
+  img {
+    height: 1.25vw;
+
+    @include mobile {
+      height: 6vw;
+    }
+  }
+}
