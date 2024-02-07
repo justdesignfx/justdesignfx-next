@@ -1,36 +1,32 @@
 import { gsap } from "@/lib/gsap"
+import { useGSAP } from "@gsap/react"
 import { ReactNode, useRef } from "react"
-import { useIsomorphicLayoutEffect } from "usehooks-ts"
 
-type Props = {
+interface Parallax {
   children: ReactNode
-  directionX?: 1 | -1
-  directionY?: 1 | -1
   speedX?: number
-  speedY?: number
+  speedY: number
 }
 
-const Parallax = ({ children, speedX = 1, speedY = 1, directionX = 1, directionY = 1 }: Props) => {
+const Parallax = (props: Parallax) => {
+  const { children, speedX, speedY } = props
   const ref = useRef(null)
 
-  useIsomorphicLayoutEffect(() => {
-    const ctx = gsap.context(() => {
+  useGSAP(
+    () => {
       gsap.to(ref.current, {
-        xPercent: () => 100 * speedX * directionX,
-        yPercent: () => 100 * speedY * directionY,
+        ...(speedX && { xPercent: 100 * speedX }),
+        ...(speedY && { yPercent: 100 * speedY }),
         scrollTrigger: {
-          markers: false,
           id: "parallax",
+          markers: false,
           scrub: true,
           trigger: ref.current,
         },
       })
-    }, ref)
-
-    return () => {
-      ctx.revert()
-    }
-  }, [directionX, directionY, speedX, speedY])
+    },
+    { scope: ref, dependencies: [speedX, speedY] }
+  )
 
   return (
     <div ref={ref} className="inherit-dims">

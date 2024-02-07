@@ -1,9 +1,11 @@
+import s from "./scroll-skew.module.scss"
+
 import { ScrollTrigger, gsap } from "@/lib/gsap"
 import { useGSAP } from "@gsap/react"
-import s from "./scroll-skew.module.scss"
-import { Fragment, ReactElement, useRef, useState } from "react"
 import cx from "clsx"
-import { Marquee } from "../marquee"
+import { ReactElement, useRef, useState } from "react"
+
+import { Marquee } from "@/components/marquee"
 
 type Props = {
   children: ReactElement
