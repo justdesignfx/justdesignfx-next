@@ -3,20 +3,19 @@ import s from "./team-members.module.scss"
 import { ScrollTrigger, gsap } from "@/lib/gsap"
 import { useGSAP } from "@gsap/react"
 import cx from "clsx"
-import { useRef } from "react"
+import { memo, useRef } from "react"
 
 import { TeamMemberProps } from "@/types"
 
 import { IconLinkedin } from "@/components/icons/icon-linkedin"
 import { Img } from "@/components/utility/img"
-
-import emojiBg from "@/public/img/emoji-bg.png"
+import { Link } from "@/components/utility/link"
 
 interface Props {
   items: TeamMemberProps[]
 }
 
-const TeamMembers = (props: Props) => {
+const TeamMembers = memo((props: Props) => {
   const { items } = props
 
   const ref = useRef(null)
@@ -60,16 +59,15 @@ const TeamMembers = (props: Props) => {
           },
           scrub: true,
           pin: true,
-          invalidateOnRefresh: true,
         },
       })
     },
-    { scope: ref }
+    { scope: ref, dependencies: [items] }
   )
 
   return (
-    <section className={cx(s.horizontalScroll, "flex items-center")} ref={ref}>
-      {items.map((member, i: number) => {
+    <section className={cx(s.teamMembers, "flex items-center")} ref={ref}>
+      {items.map((member, i) => {
         return (
           <div className={cx(s.item, { [s.last]: i === items.length - 1 }, "item", "flex-shrink-0")} key={i}>
             <div className={cx(s.memberCard, "flex items-center gap-7")}>
@@ -78,9 +76,9 @@ const TeamMembers = (props: Props) => {
                   <Img
                     src={member.iconImage}
                     className={cx(s.emoji, "object-contain")}
-                    alt="Team Member"
-                    height={500}
-                    width={500}
+                    alt="Team Member Icon"
+                    height={100}
+                    width={100}
                   />
                 </div>
                 <div className={s.memberPic}>
@@ -88,18 +86,13 @@ const TeamMembers = (props: Props) => {
                 </div>
               </div>
 
-              <div
-                className={cx(s.info, "flex flex-col items-start")}
-                //   style={{
-                //     paddingRight: i === items.length - 1 && windowSize.width > breakpoints.tablet ? "25vw" : undefined,
-                //   }}
-              >
+              <div className={cx(s.info, "flex flex-col items-start")}>
                 <h6 className={s.credentials}>
                   {member.name}
                   <br /> {member.surname}
                 </h6>
 
-                {member?.role?.split("<br>").map((par: string, i: number) => {
+                {member.role.split("<br>").map((par: string, i: number) => {
                   return (
                     <small className={s.role} key={i}>
                       {par}
@@ -108,9 +101,9 @@ const TeamMembers = (props: Props) => {
                 })}
 
                 {member.linkedin && (
-                  <a className={cx(s.iconC, "cursor-pointer")} href={member.linkedin} target="_blank" rel="noreferrer">
+                  <Link className={cx(s.iconC, "cursor-pointer")} href={member.linkedin} external>
                     <IconLinkedin fill="var(--white)" />
-                  </a>
+                  </Link>
                 )}
               </div>
             </div>
@@ -121,7 +114,7 @@ const TeamMembers = (props: Props) => {
       <div className={cx(s.progressBar, "progress-bar")}></div>
 
       <div className={cx(s.keepScrolling)}>
-        <div className={cx(s.transform, "keep-scrolling flex")}>
+        <div className={cx(s.transform, "keep-scrolling flex items-center")}>
           <p>KEEP SCROOOOOOOOOOLLING!</p>
           <p>KEEP SCROOOOOOOOOOLLING!</p>
           <p>KEEP SCROOOOOOOOOOLLING!</p>
@@ -142,6 +135,8 @@ const TeamMembers = (props: Props) => {
       </div>
     </section>
   )
-}
+})
+
+TeamMembers.displayName = "TeamMembers"
 
 export default TeamMembers
