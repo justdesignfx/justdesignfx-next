@@ -7,7 +7,10 @@ export interface Seo {
 
 type ComponentList = "mediaContainer" | "imageReveal" | "mediaSlider" | "asymmetricMediaContainer" | "workInfo"
 
+export type CursorType = "default" | "click"
+
 export interface WorkCardProps {
+  index?: number
   awardImage: string
   id: string
   mediaSrcDesktop: string

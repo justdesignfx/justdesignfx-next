@@ -7,44 +7,103 @@ import { Link } from "@/components/utility/link"
 import { Video } from "@/components/utility/video/"
 
 import { WorkCardProps } from "@/types"
+import { useGSAP } from "@gsap/react"
+import { useRef } from "react"
+import { CustomEase, gsap } from "@/lib/gsap"
+import { IconDot } from "../icons/icon-dot"
 
 const CardWork = (props: WorkCardProps) => {
-  const { awardImage, mediaSrcDesktop, mediaSrcMobile, mediaType, services, title, url } = props
+  const { awardImage, mediaSrcDesktop, mediaSrcMobile, mediaType, services, title, url, index, ...other } = props
+  const ref = useRef(null)
+
+  console.log("other", other)
+
+  function isEven(num: number) {
+    if (num === 0) {
+      return true
+    }
+
+    if (num % 2 === 0) {
+      return true
+    }
+
+    return false
+  }
+
+  useGSAP(
+    () => {
+      const ease = CustomEase.create("easeName", ".25,0,0,1")
+
+      gsap.to([".media-c", ".transform"], {
+        duration: 1.5,
+        scale: 1,
+        ease,
+        scrollTrigger: {
+          trigger: ref.current,
+          markers: true,
+          // start: "center-=25% bottom",
+          toggleActions: "play reset play reset ",
+        },
+      })
+    },
+    {
+      scope: ref,
+    }
+  )
 
   return (
-    <div className={cx(s.cardWork, { [s.v2]: !services })}>
-      <Link className={cx(s.mediaC, "mb-5")} href={`/works/${url}`}>
-        {mediaType === "video" && <Video src={mediaSrcDesktop} autoPlay playsInline loop muted></Video>}
+    <Link
+      className={cx(s.cardWork, "card-work", {
+        [s.v2]: !services,
+        [s.left]: index !== undefined ? isEven(index) : null,
+        [s.right]: index !== undefined ? !isEven(index ?? 0) : null,
+      })}
+      href={`/works/${url}`}
+      ref={ref}
+    >
+      <div className={cx(s.transform, "transform")}>
+        <div className={cx(s.overflowC, "overflow-hidden")}>
+          <div className={cx(s.mediaC, "media-c")}>
+            {mediaType === "video" && <Video src={mediaSrcDesktop} autoPlay playsInline loop muted></Video>}
 
-        {mediaType === "image" && (
-          <>
-            <Img
-              className="object-cover"
-              src={mediaSrcDesktop}
-              alt="Project Visual"
-              height={500}
-              width={500}
-              loading="lazy"
-            />
-            {awardImage && <Img className={s.award} src={awardImage} alt="Award Visual" height={200} width={300} />}
-          </>
-        )}
-      </Link>
-
-      <h3 className={cx(s.cardTitle)}>{title}</h3>
-
-      {services && (
-        <div className={cx("flex flex-wrap gap-2")}>
-          {services?.map((category, index) => {
-            return (
-              <small key={index} className={s.cardTag}>
-                {category}
-              </small>
-            )
-          })}
+            {mediaType === "image" && (
+              <>
+                <Img
+                  className="object-cover"
+                  src={mediaSrcDesktop}
+                  alt="Project Visual"
+                  height={500}
+                  width={500}
+                  loading="lazy"
+                />
+                {awardImage && <Img className={s.award} src={awardImage} alt="Award Visual" height={200} width={300} />}
+              </>
+            )}
+          </div>
         </div>
-      )}
-    </div>
+
+        <h3 className={cx(s.cardTitle)}>{title}</h3>
+
+        {services && (
+          <div className={cx("flex flex-wrap gap-2 items-center w-11/12")}>
+            {services?.map((category, i) => {
+              return (
+                <>
+                  <small key={i} className={s.cardTag}>
+                    {category}
+                  </small>
+                  {i !== services.length - 1 && (
+                    <span className={cx(s.iconC, "flex items-center justify-center")}>
+                      <IconDot fill="var(--black)" />
+                    </span>
+                  )}
+                </>
+              )
+            })}
+          </div>
+        )}
+      </div>
+    </Link>
   )
 }
 
