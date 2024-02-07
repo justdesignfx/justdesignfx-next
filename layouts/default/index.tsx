@@ -38,7 +38,7 @@ const DefaultLayout = ({ children, seo, theme = "dark" }: Props) => {
             ],
           }))}
       />
-      <main className={cx("main")}>{children}</main>
+      <main className={cx(s.main, "main")}>{children}</main>
       <Footer />
     </div>
   )
