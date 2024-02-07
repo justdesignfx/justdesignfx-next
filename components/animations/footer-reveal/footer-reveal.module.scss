@@ -1,10 +1,13 @@
-.footerReveal {
+.revealC {
   position: relative;
+  will-change: transform;
+  z-index: z-index("footer");
 
   .overlay {
     @include position(absolute, 0, 0, 0, 0);
-    background: var(--black);
+    @include dims(100%);
+    background: #000000;
     pointer-events: none;
-    opacity: 1;
+    z-index: z-index("footer-overlay");
   }
 }

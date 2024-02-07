@@ -1,17 +1,17 @@
-import { ReactNode, useCallback, useRef, useState } from "react"
 import s from "./footer-reveal.module.scss"
 
-import { gsap, ScrollTrigger } from "@/lib/gsap"
-import cn from "clsx"
-import { useIsomorphicLayoutEffect } from "usehooks-ts"
+import { gsap } from "@/lib/gsap"
+import { useGSAP } from "@gsap/react"
+import cx from "clsx"
+import { ReactNode, useCallback, useRef, useState } from "react"
 
 type Props = {
   children: ReactNode
 }
 
 const FooterReveal = ({ children }: Props) => {
-  const ref = useRef(null)
-  const tl = useRef(gsap.timeline({ paused: true }))
+  const ref = useRef<HTMLDivElement | null>(null)
+  // const tl = useRef(gsap.timeline({ paused: true }))
   const [height, setHeight] = useState(0)
 
   const refElement = useCallback((node: any) => {
@@ -19,46 +19,112 @@ const FooterReveal = ({ children }: Props) => {
     setHeight(node.getBoundingClientRect().height)
   }, [])
 
-  useIsomorphicLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      tl.current
-        .from(
-          ".wrapper",
-          {
-            ease: "none",
-            yPercent: -50,
-          },
-          "s"
-        )
-        .to(
-          ".overlay",
-          {
-            ease: "none",
-            opacity: 0,
-          },
-          "s"
-        )
+  // useIsomorphicLayoutEffect(() => {
+  //   const ctx = gsap.context(() => {
+  //     tl.current
+  //       .from(
+  //         ".wrapper",
+  //         {
+  //           ease: "none",
+  //           yPercent: -50,
+  //         },
+  //         "s"
+  //       )
+  //       .to(
+  //         ".overlay",
+  //         {
+  //           ease: "none",
+  //           opacity: 0,
+  //         },
+  //         "s"
+  //       )
 
-      ScrollTrigger.create({
-        markers: false,
-        animation: tl.current,
-        id: "footer",
-        trigger: ref.current,
-        start: "top bottom",
-        end: () => `top bottom-=${height}`,
-        scrub: true,
+  //     ScrollTrigger.create({
+  //       markers: false,
+  //       animation: tl.current,
+  //       id: "footer",
+  //       trigger: ref.current,
+  //       start: "top bottom",
+  //       end: () => `top bottom-=${height}`,
+  //       scrub: true,
+  //     })
+  //   }, ref)
+
+  //   return () => ctx.revert()
+  // }, [height])
+
+  useGSAP(
+    () => {
+      gsap.set(ref.current, {
+        yPercent: -50,
       })
-    }, ref)
 
-    return () => ctx.revert()
-  }, [height])
+      gsap.set(".overlay", {
+        opacity: 1,
+      })
+
+      gsap.to(ref.current, {
+        // translateZ: -100,
+        yPercent: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ref.current,
+          start: "center bottom",
+          end: () => `center bottom-=${height}`,
+          scrub: true,
+          // markers: true,
+        },
+      })
+
+      gsap.to(".overlay", {
+        // translateZ: -100,
+        opacity: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ref.current,
+          start: "center bottom",
+          end: () => `center bottom-=${height}`,
+          scrub: true,
+          // onEnter: () => {
+          //   gsap.to(q("[data-overlay]"), {
+          //     pointerEvents: "auto",
+          //   })
+          // },
+          // onLeave: () => {
+          //   gsap.to(q("[data-overlay]"), {
+          //     pointerEvents: "none",
+          //   })
+          // },
+          // onEnterBack: () => {
+          //   gsap.to(q("[data-overlay]"), {
+          //     pointerEvents: "auto",
+          //   })
+          // },
+          // onLeaveBack: () => {
+          //   gsap.to(q("[data-overlay]"), {
+          //     pointerEvents: "none",
+          //   })
+          // }, // markers: true,
+        },
+      })
+    },
+    {
+      scope: ref,
+      dependencies: [height],
+      revertOnUpdate: true,
+    }
+  )
 
   return (
-    <div className={s.footerReveal} ref={ref}>
-      <div className={cn(s.wrapper, "wrapper")} ref={(node) => refElement(node)}>
-        {children}
-      </div>
-      <div className={cn(s.overlay, "overlay")}></div>
+    <div
+      className={s.revealC}
+      ref={(node) => {
+        ref.current = node
+        refElement(node)
+      }}
+    >
+      {children}
+      <div className={cx(s.overlay, "overlay")}></div>
     </div>
   )
 }
