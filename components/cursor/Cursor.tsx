@@ -1,6 +1,6 @@
-import { useRef, useState } from "react"
 import s from "./custom-cursor.module.scss"
 
+import { useRef, useState } from "react"
 import { gsap } from "@/lib/gsap"
 import cn from "clsx"
 import { useIsomorphicLayoutEffect } from "usehooks-ts"
@@ -9,8 +9,9 @@ import { useRouter } from "next/router"
 import useMousePosition from "@/hooks/useMousePosition"
 import { useCursorStore } from "@/lib/store/cursor"
 import { CursorType } from "@/types"
+import { useGSAP } from "@gsap/react"
 
-const CustomCursor = () => {
+const Cursor = () => {
   const ref = useRef(null)
   const cursorStore = useCursorStore()
   const mouse = useMousePosition()
@@ -43,23 +44,29 @@ const CustomCursor = () => {
   }, [cursorStore])
 
   useIsomorphicLayoutEffect(() => {
-    if (!cursorStore.visible) return
+    cursorStore.setCursor("default")
+  }, [router.pathname])
 
-    const ctx = gsap.context(() => {
+  useGSAP(
+    () => {
+      if (!cursorStore.visible) return
+
       gsap.to(ref.current, {
-        x: mouse.x ? mouse.x : 0,
-        y: mouse.y ? mouse.y : 0,
+        x: mouse.x ?? 0,
+        y: mouse.y ?? 0,
         duration: 0,
       })
-    }, ref)
+    },
+    {
+      scope: ref,
+      dependencies: [mouse, cursorStore],
+    }
+  )
 
-    return () => ctx.revert()
-  }, [mouse, cursorStore])
+  useGSAP(
+    () => {
+      if (!cursorStore.visible) return
 
-  useIsomorphicLayoutEffect(() => {
-    if (!cursorStore.visible) return
-
-    const ctx = gsap.context(() => {
       gsap.to(".c", {
         opacity: 0,
         scale: 0.5,
@@ -73,14 +80,12 @@ const CustomCursor = () => {
           })
         },
       })
-    }, ref)
-
-    return () => ctx.revert()
-  }, [cursorStore])
-
-  useIsomorphicLayoutEffect(() => {
-    cursorStore.setCursor("default")
-  }, [router.pathname])
+    },
+    {
+      scope: ref,
+      dependencies: [cursorStore],
+    }
+  )
 
   return (
     <div
@@ -90,10 +95,10 @@ const CustomCursor = () => {
       ref={ref}
     >
       <div className={cn(s.c, "c", "flex-center", [s[cursorUi]])}>
-        <span className={cn({ [s.active]: cursorUi === "click" || cursorUi === "clickDark" })}>Click</span>
+        <span className={cn({ [s.active]: cursorUi === "click" })}>Click</span>
       </div>
     </div>
   )
 }
 
-export { CustomCursor }
+export default Cursor
