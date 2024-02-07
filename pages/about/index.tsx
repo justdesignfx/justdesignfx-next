@@ -5,13 +5,14 @@ import { useGSAP } from "@gsap/react"
 import cx from "clsx"
 import { Fragment, useRef } from "react"
 
-import { all as getServices } from "@/api/queries/services"
 import { all as getAwards } from "@/api/queries/awards"
+import { all as getServices } from "@/api/queries/services"
 import { all as getTeamMembers } from "@/api/queries/team-members"
 
 import { Parallax } from "@/components/animations/parallax"
 import { IconArrowDown } from "@/components/icons/icon-arrow-down"
 import { Marquee } from "@/components/marquee"
+import { TeamMembers } from "@/components/team-members"
 import { Img } from "@/components/utility/img"
 import { Link } from "@/components/utility/link"
 import { DefaultLayout } from "@/layouts/default"
@@ -24,7 +25,6 @@ import sun from "@/public/img/references-sun.svg"
 import teamBlob from "@/public/img/team-blob.png"
 import teamEyeUp from "@/public/img/team-eye-up.svg"
 import teamSmile from "@/public/img/team-smile.png"
-import { TeamMembers } from "@/components/team-members"
 
 interface Props {
   services: ServiceProps[]
@@ -34,81 +34,7 @@ interface Props {
 
 const About = (props: Props) => {
   const { services, awards, teamMembers } = props
-
-  const introRef = useRef(null)
   const preTeamRef = useRef(null)
-
-  // useGSAP(
-  //   () => {
-  //     const tl = gsap.timeline({ paused: true })
-
-  //     // tl.from(".we-are", {
-  //     //   duration: 0.8,
-  //     //   rotationX: 75,
-  //     //   stagger: 0.1,
-  //     //   transformOrigin: "top center",
-  //     //   z: -150,
-  //     //   opacity: 0,
-  //     // })
-  //     //   .from(".relentless", {
-  //     //     rotateY: -60,
-  //     //     scale: 0.5,
-  //     //     opacity: 0,
-  //     //     delay: -0.1,
-  //     //   })
-  //     //   .from(".dreamers", {
-  //     //     rotateY: -60,
-  //     //     scale: 0.5,
-  //     //     opacity: 0,
-  //     //     delay: -0.1,
-  //     //   })
-  //     //   .from(".vertical-left", {
-  //     //     opacity: 0,
-  //     //   })
-
-  //     // tl.play()
-
-  //     const weAreLetters = gsap.utils.toArray(".we-are-letter")
-  //     const justLetters = gsap.utils.toArray(".just-letter")
-  //     const relentlessLetters = gsap.utils.toArray(".relentless-letter")
-  //     const dreamersLetters = gsap.utils.toArray(".dreamers-letter")
-
-  //     tl.from(".we-are", {
-  //       duration: 0.8,
-
-  //       opacity: 0,
-  //     }).from(justLetters, {
-  //       duration: 0.8,
-  //       stagger: 0.1,
-  //       opacity: 0,
-  //     })
-  //     tl.from(".relentless", {
-  //       duration: 0.8,
-
-  //       opacity: 0,
-  //     })
-  //       .from(dreamersLetters, {
-  //         duration: 0.8,
-  //         stagger: 0.1,
-  //         opacity: 0,
-  //       })
-  //       .from(".vertical-left", {
-  //         duration: 0.5,
-  //         opacity: 0,
-  //       })
-  //     // .from(".blob", {
-  //     //   duration: 0.5,
-  //     //   opacity: 0,
-  //     // })
-  //     // .from(".smile", {
-  //     //   duration: 0.5,
-  //     //   opacity: 0,
-  //     // })
-
-  //     tl.play()
-  //   },
-  //   { scope: introRef }
-  // )
 
   useGSAP(
     () => {
@@ -141,7 +67,7 @@ const About = (props: Props) => {
           "We design iconic brands with future impact. JUST DESIGN FX is a future-focused brand and digital design agency with offices located in Istanbul and New York.",
       }}
     >
-      <section className={cx(s.intro, "flex flex-col items-center")} ref={introRef}>
+      <section className={cx(s.intro, "flex flex-col items-center")}>
         <h1>
           <span className="block we-are">
             <span className="we-are-letter">W</span>
@@ -220,19 +146,19 @@ const About = (props: Props) => {
         </div>
 
         <div className={cx(s.blob, "blob")}>
-          <Parallax speedX={0} speedY={-0.5}>
+          <Parallax speedY={-0.5}>
             <Img src={teamBlob} alt="Water Blob" />
           </Parallax>
         </div>
 
         <div className={cx(s.smile, "smile")}>
-          <Parallax speedX={0} speedY={-0.25}>
+          <Parallax speedY={-0.25}>
             <Img src={teamSmile} alt="Smiley" />
           </Parallax>
         </div>
 
         <div className={s.whatWeDo}>
-          <Parallax speedX={0} speedY={-1.25}>
+          <Parallax speedY={-1.25}>
             <h2 className="text-center">
               WHAT
               <br /> WE DO.
