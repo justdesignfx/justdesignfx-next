@@ -4,8 +4,18 @@
   padding-top: var(--header-height);
   transition: 400ms background-color var(--ease-in-out-circ);
 
+  &.light {
+    .main {
+      border-bottom-left-radius: desktop-vw(32px);
+      border-bottom-right-radius: desktop-vw(32px);
+      overflow: hidden;
+    }
+  }
+
   .main {
+    background-color: var(--theme-primary);
     position: relative;
     z-index: z-index("main");
+    margin-bottom: desktop-vw(-32px);
   }
 }

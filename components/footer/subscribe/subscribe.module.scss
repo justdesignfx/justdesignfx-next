@@ -1,0 +1,189 @@
+.subscribe {
+  padding: desktop-vw(50px);
+  padding-top: desktop-vw(100px);
+  position: relative;
+
+  @include mobile {
+    padding: mobile-vw(50px);
+  }
+
+  &::after {
+    content: "";
+    @include dims(calc(100% - desktop-vw(50px) * 2), 1px);
+    @include position(absolute, auto, 0, 0, 50%);
+    background: var(--cynical-black);
+    transform: translateX(-50%);
+  }
+
+  .field {
+    > label {
+      color: var(--bleached-silk);
+      font-family: var(--font-vanguard-cf);
+      font-size: desktop-vw(32px);
+      font-weight: 700;
+      margin-bottom: desktop-vw(24px);
+
+      @include mobile {
+        font-size: 10vw;
+        margin: 7vw auto;
+        text-align: center;
+      }
+
+      br {
+        display: none;
+
+        @include mobile {
+          display: block;
+        }
+      }
+    }
+
+    > input {
+      @include dims(desktop-vw(535px), desktop-vw(60px));
+      border-radius: desktop-vw(64px);
+      border: 1px solid var(--palladium);
+      color: var(--bleached-silk);
+      font-family: var(--font-visby-cf);
+      font-size: desktop-vw(20px);
+      font-weight: 500;
+      padding: 0 desktop-vw(24px);
+
+      @include mobile {
+        @include dims(100%, 15vw);
+        text-align: center;
+      }
+
+      &::placeholder {
+        color: var(--palladium);
+        font-family: var(--font-visby-cf);
+        font-size: desktop-vw(20px);
+        font-weight: 400;
+        transition: 400ms all ease;
+      }
+
+      &:focus {
+        font-family: var(--font-visby-cf);
+        font-weight: 500;
+
+        &::placeholder {
+          opacity: 0.3;
+        }
+      }
+
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus,
+      &:-webkit-autofill:active {
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: var(--white);
+        transition: background-color 5000s ease-in-out 0s;
+      }
+    }
+
+    .errorMessage {
+      @include position(absolute, 60%, auto, auto, 105%);
+
+      @include mobile {
+        display: none;
+      }
+
+      > small {
+        color: var(--white);
+        font-family: var(--font-visby-cf);
+        font-size: 0.8vw;
+        font-weight: 400;
+        line-height: 1.5;
+      }
+    }
+  }
+
+  .privacyCheck {
+    margin-top: desktop-vw(20px);
+    padding-left: desktop-vw(20px);
+
+    @include mobile {
+      @include dims(100%, auto);
+      margin: 5vw auto 0 auto;
+    }
+
+    .checkboxC {
+      margin-bottom: desktop-vw(20px);
+
+      .checkbox {
+        $dims: #{desktop-vw(20px)};
+        @include dims($dims);
+        border-radius: desktop-vw(4px);
+        border: 1px solid var(--palladium);
+        flex-shrink: 0;
+        margin-top: desktop-vw(6px);
+        position: relative;
+
+        @include mobile {
+          border-radius: 6px;
+        }
+
+        .inner {
+          @include position(absolute, 50%, auto, auto, 50%);
+          @include dims(calc($dims - desktop-vw(6px)));
+          background-color: var(--white);
+          border-radius: desktop-vw(2px);
+          opacity: 0;
+          transform: translate(-50%, -50%);
+          transition: 200ms all ease;
+          visibility: hidden;
+
+          &.checked {
+            opacity: 1;
+            visibility: visible;
+          }
+
+          @include mobile {
+            @include dims($dims - 6px);
+          }
+        }
+      }
+
+      .radioText {
+        color: var(--bleached-silk);
+        font-family: var(--font-visby-cf);
+        font-weight: 400;
+        font-size: 0.85rem;
+        line-height: 180%;
+        opacity: 0.6;
+
+        @include mobile {
+          font-size: 12px;
+          line-height: 160%;
+          text-align: left;
+        }
+
+        br {
+          @include mobile {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  .submitBtn {
+    color: var(--white);
+    font-family: var(--font-visby-cf);
+    font-size: desktop-vw(32px);
+    font-weight: 600;
+    margin-left: desktop-vw(50px);
+    opacity: 1;
+    pointer-events: auto;
+    transition: 200ms opacity ease;
+
+    @include mobile {
+      font-size: 10vw;
+      margin: 0 auto;
+    }
+
+    &[disabled] {
+      opacity: 0.2;
+      pointer-events: none;
+    }
+  }
+}
