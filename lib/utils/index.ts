@@ -49,3 +49,15 @@ export function shareOnSocialMedia() {
     copyContent()
   }
 }
+
+export function isEven(num: number) {
+  if (num === 0) {
+    return true
+  }
+
+  if (num % 2 === 0) {
+    return true
+  }
+
+  return false
+}
