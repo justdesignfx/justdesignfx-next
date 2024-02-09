@@ -2,6 +2,7 @@
   height: var(--header-height);
   margin-top: calc(var(--header-height) * -1);
   position: relative;
+  z-index: z-index("header");
 
   .logo {
     @include position(absolute, 50%, auto, auto, desktop-vw(20px));
