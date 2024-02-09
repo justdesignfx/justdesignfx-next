@@ -1,34 +1,22 @@
 import s from "./card-work.module.scss"
 
+import { CustomEase, gsap } from "@/lib/gsap"
+import { useGSAP } from "@gsap/react"
 import cx from "clsx"
+import { useRef } from "react"
 
+import { IconDot } from "@/components/icons/icon-dot"
 import { Img } from "@/components/utility/img"
 import { Link } from "@/components/utility/link"
 import { Video } from "@/components/utility/video/"
 
 import { WorkCardProps } from "@/types"
-import { useGSAP } from "@gsap/react"
-import { useRef } from "react"
-import { CustomEase, gsap } from "@/lib/gsap"
-import { IconDot } from "../icons/icon-dot"
+
+import { isEven } from "@/lib/utils"
 
 const CardWork = (props: WorkCardProps) => {
   const { awardImage, mediaSrcDesktop, mediaSrcMobile, mediaType, services, title, url, index, ...other } = props
   const ref = useRef(null)
-
-  console.log("other", other)
-
-  function isEven(num: number) {
-    if (num === 0) {
-      return true
-    }
-
-    if (num % 2 === 0) {
-      return true
-    }
-
-    return false
-  }
 
   useGSAP(
     () => {
@@ -39,9 +27,8 @@ const CardWork = (props: WorkCardProps) => {
         scale: 1,
         ease,
         scrollTrigger: {
+          markers: false,
           trigger: ref.current,
-          markers: true,
-          // start: "center-=25% bottom",
           toggleActions: "play reset play reset ",
         },
       })

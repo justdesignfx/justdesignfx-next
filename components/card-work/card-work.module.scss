@@ -67,6 +67,7 @@
 
     .overflowC {
       @include dims(100%, desktop-vw(300px));
+      margin-bottom: desktop-vw(20px);
     }
 
     .cardTitle {
