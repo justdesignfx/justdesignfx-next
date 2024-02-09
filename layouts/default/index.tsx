@@ -21,7 +21,7 @@ const DefaultLayout = ({ children, seo, theme = "dark" }: Props) => {
   const router = useRouter()
 
   return (
-    <div className={cx(s.defaultLayout, `theme-${theme}`)}>
+    <div className={cx(s.defaultLayout, `theme-${theme}`, [s[theme]])}>
       <Header />
       <CustomHead
         {...(seo &&

@@ -1,7 +1,4 @@
 .items {
-  border-bottom-left-radius: desktop-vw(32px);
-  border-bottom-right-radius: desktop-vw(32px);
-
   .card {
     @include dims(auto, desktop-vw(330px));
   }
