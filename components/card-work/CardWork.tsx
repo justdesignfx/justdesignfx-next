@@ -61,9 +61,9 @@ const CardWork = (props: WorkCardProps) => {
       href={`/works/${url}`}
       ref={ref}
     >
-      <div className={cx(s.transform, "transform")}>
+      <div className={cx(s.transform, "transform will-change-transform")}>
         <div className={cx(s.overflowC, "overflow-hidden")}>
-          <div className={cx(s.mediaC, "media-c")}>
+          <div className={cx(s.mediaC, "media-c will-change-transform")}>
             {mediaType === "video" && <Video src={mediaSrcDesktop} autoPlay playsInline loop muted></Video>}
 
             {mediaType === "image" && (
