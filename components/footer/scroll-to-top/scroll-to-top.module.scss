@@ -1,0 +1,23 @@
+.scrollToTopC {
+  @include dims(desktop-vw(150px));
+  transition: 200ms all ease;
+
+  .eye,
+  .mouth {
+    transition: 300ms transform ease;
+  }
+
+  @include hover {
+    &:hover {
+      transform: translateY(desktop-vw(-10px));
+
+      .eye {
+        transform: translateY(desktop-vw(-8px));
+      }
+
+      .mouth {
+        transform: translateY(desktop-vw(-12px));
+      }
+    }
+  }
+}
