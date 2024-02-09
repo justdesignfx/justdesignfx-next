@@ -1,0 +1,654 @@
+.intro {
+  padding-bottom: desktop-vw(200px);
+  position: relative;
+
+  @include mobile {
+    margin-top: 10vw;
+  }
+
+  > h1 {
+    margin-bottom: desktop-vw(150px);
+
+    > span {
+      display: block;
+      color: var(--white);
+      font-size: desktop-vw(130px);
+      font-family: var(--font-vanguard-cf);
+      font-weight: 700;
+      margin-bottom: desktop-vw(-10px);
+
+      br {
+        display: none;
+      }
+
+      @include mobile {
+        font-size: 20vw;
+        text-align: center;
+
+        br {
+          display: block;
+        }
+      }
+
+      &:nth-child(1) {
+        margin-right: desktop-vw(200px);
+
+        @include mobile {
+          margin: 0;
+        }
+      }
+
+      &:nth-child(2) {
+        margin-left: desktop-vw(200px);
+
+        @include mobile {
+          margin: 0;
+        }
+      }
+
+      &:nth-child(3) {
+        margin-top: -15px;
+        margin-right: desktop-vw(100px);
+
+        @include mobile {
+          margin: 0;
+        }
+      }
+
+      .love {
+        display: inline-block;
+        margin-right: desktop-vw(20px);
+        position: relative;
+
+        .black,
+        .green {
+          @include position(absolute, 50%, auto, auto, 50%);
+          transform: translate(-50%, -50%);
+        }
+
+        .black {
+          color: var(--black);
+          margin-top: desktop-vw(4px);
+          margin-left: desktop-vw(-8px);
+          z-index: -1;
+
+          @include mobile {
+            margin-top: 2px;
+            margin-left: -4px;
+          }
+        }
+
+        .green {
+          color: var(--isotonic-water);
+          margin-top: desktop-vw(5px);
+          margin-left: desktop-vw(-12px);
+          z-index: -2;
+
+          @include mobile {
+            margin-top: 3px;
+            margin-left: -6px;
+          }
+        }
+      }
+    }
+
+    .italic {
+      font-family: var(--font-ageya-oblique);
+      font-weight: 100;
+    }
+  }
+
+  .imgC {
+    &.blob {
+      @include position(absolute, desktop-vw(0px), 0, auto, auto);
+      @include dims(desktop-vw(940px), auto);
+
+      @include mobile {
+        @include position(absolute, -10vw, -50vw, auto, auto);
+        @include dims(150vw, auto);
+      }
+    }
+
+    &.smile {
+      @include position(absolute, -5%, 15%, auto, auto);
+      @include dims(12vw);
+
+      @include mobile {
+        @include position(absolute, 25vw, auto, auto, 2vw);
+        @include dims(20vw);
+        transform: rotate(-10deg);
+      }
+    }
+  }
+}
+
+.contactForm {
+  background: var(--black);
+  border: 2px solid var(--white);
+  border-radius: desktop-vw(64px);
+  margin: 0 desktop-vw(16px);
+  padding: desktop-vw(150px);
+  position: relative;
+
+  @include mobile {
+    margin: 70vw 0 0 0;
+    padding: 50vw 4vw 15vw 4vw;
+    border-radius: 32px;
+  }
+
+  .dropALine {
+    @include position(absolute, -12vw, auto, auto, 5vw);
+    @include dims(15vw, auto);
+
+    @include mobile {
+      @include position(absolute, -200px, auto, auto, 50%);
+      @include dims(65vw, auto);
+      transform: translateX(-50%);
+    }
+  }
+
+  .form {
+    @include dims(100%);
+    display: flex;
+    flex-direction: column;
+
+    .rowX {
+      margin-bottom: 4vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      column-gap: 2vw;
+
+      @include mobile {
+        align-items: center;
+        flex-direction: column;
+        justify-content: stretch;
+        margin-bottom: 25vw;
+      }
+    }
+
+    .rowY {
+      margin-bottom: 3vw;
+      display: flex;
+      flex-direction: column;
+
+      @include mobile {
+        gap: 10vw;
+        margin-bottom: 25vw;
+      }
+    }
+
+    .formText {
+      color: var(--white);
+      font-family: VanguardCF-Bold;
+      font-size: 4.8vw;
+      line-height: 100%;
+      letter-spacing: 0;
+      flex-shrink: 0;
+      margin: 0;
+
+      br {
+        display: none;
+
+        @include mobile {
+          display: block;
+        }
+      }
+
+      @include mobile {
+        text-align: center;
+        font-size: 13.5vw;
+        line-height: 120%;
+      }
+    }
+
+    .inputWrapper {
+      @include dims(100%, 4.5vw);
+      flex-grow: 1;
+      position: relative;
+
+      @include mobile {
+        @include dims(100%, 12vw);
+        margin-top: 4vw;
+      }
+
+      &.textarea {
+        @include dims(100%, 9vw);
+
+        @include mobile {
+          @include dims(100%, 30vw);
+          font-size: 6vw;
+        }
+      }
+
+      &::after {
+        content: "";
+        @include position(absolute, 110%, 0, 0, 0);
+        @include dims(100%, 1px);
+        background: #343434;
+      }
+
+      .label {
+        @include position(absolute, 0, 0, 0, 0);
+        @include dims(100%);
+        color: #343434;
+        font-family: VanguardCF-Bold;
+        font-size: 4.8vw;
+        line-height: 100%;
+        opacity: 0.7;
+        pointer-events: none;
+        text-align: center;
+        transition: 0.2s all ease;
+        white-space: nowrap;
+
+        @include mobile {
+          font-size: 12vw;
+        }
+      }
+
+      .formInput {
+        @include dims(100%);
+        background: transparent;
+        border: none;
+        color: var(--white);
+        font-family: VisbyCF-Heavy;
+        font-size: 3vw;
+        line-height: 100%;
+        outline: none;
+        text-align: center;
+        vertical-align: bottom;
+        transform: translateY(0.3vw);
+
+        @include mobile {
+          font-size: 7vw;
+          min-height: 30px;
+        }
+
+        &.textarea {
+          color: var(--white);
+          font-family: VisbyCF-Heavy;
+          font-size: 1.75vw;
+          resize: none;
+          line-height: 140%;
+
+          @include mobile {
+            font-size: 7vw;
+          }
+        }
+      }
+    }
+
+    .buttons {
+      column-gap: 1rem;
+      margin-top: 2.5vw;
+
+      @include mobile {
+        justify-content: center;
+        flex-direction: column;
+        row-gap: 1rem;
+      }
+
+      .reasonBtn {
+        background: transparent;
+        box-shadow: 0 0 0 1pt var(--white);
+        border-radius: 33px;
+        font-size: 2vw;
+        padding: 0.25vw 2.5vw;
+
+        &.active {
+          background: #d9ff51;
+          box-shadow: 0 0 0 1pt #d9ff51;
+
+          .btnText {
+            color: var(--black);
+          }
+        }
+
+        @include mobile {
+          padding: 1vw 10vw;
+          font-size: 7vw;
+          border-radius: 28px;
+        }
+
+        .btnText {
+          color: var(--white);
+          font-family: VanguardCF-Regular;
+          font-weight: 400;
+          transform: translateY(-0.05em);
+        }
+
+        @include hover {
+          &:hover {
+            background: #d9ff51;
+            box-shadow: 0 0 0 1pt #d9ff51;
+            outline: none;
+
+            .btnText {
+              color: var(--black);
+            }
+          }
+        }
+      }
+    }
+
+    .actions {
+      .btnC {
+        @include dims(desktop-vw(100px));
+        border-radius: 50%;
+        border: 1px solid var(--isotonic-water);
+        flex-shrink: 0;
+        position: relative;
+
+        @include mobile {
+          @include dims(30vw);
+        }
+
+        .imgC {
+          opacity: 0.2;
+          transition: 200ms all ease;
+          transform: scale(0.8);
+          transform-origin: center;
+          user-select: none;
+        }
+      }
+
+      .privacyText {
+        color: var(--white);
+        font-family: var(--font-visby-cf);
+        font-size: desktop-vw(18px);
+        font-weight: 400;
+
+        @include mobile {
+          font-size: 4vw;
+          text-align: center;
+          line-height: 160%;
+        }
+
+        .link {
+          text-decoration: underline;
+        }
+
+        br {
+          display: none;
+
+          @include mobile {
+            display: block;
+          }
+        }
+      }
+
+      .submitBtn {
+        background: transparent;
+        box-shadow: 0 0 0 1pt var(--white);
+        border: none;
+        border-radius: 32px;
+        margin-left: auto;
+        opacity: 0;
+        outline: none;
+        padding: 0.5rem 9vw;
+        pointer-events: none;
+        text-decoration: none;
+        transition: 300ms all ease;
+
+        > span {
+          color: var(--white);
+          font-size: 2.5vw;
+          font-family: VanguardCF-Regular;
+          transform: translateY(-0.1em);
+
+          @include mobile {
+            font-size: 24px;
+          }
+        }
+
+        @include hover {
+          &:hover {
+            background: #d9ff51;
+            box-shadow: 0 0 0 1pt #d9ff51;
+            outline: none;
+
+            > span {
+              color: var(--black);
+            }
+          }
+        }
+      }
+
+      .submitBtnMobile {
+        display: none;
+
+        @include mobile {
+          background: transparent;
+          border: none;
+          opacity: 0;
+          pointer-events: none;
+          transition: 0.2s all ease;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          column-gap: 1rem;
+        }
+
+        .btnText {
+          color: var(--white);
+          font-family: VanguardCF-Medium;
+          font-size: 14vw;
+          line-height: 100%;
+          text-align: left;
+          transform: translateY(-0.05em);
+        }
+
+        .iconRightArrow {
+          @include dims(13vw);
+          background: #d9ff51;
+          border-radius: 50%;
+          transform: rotate(45deg);
+
+          @include mobile {
+            height: 16vw;
+            width: 16vw;
+          }
+        }
+      }
+
+      &.checked {
+        .btnContainer {
+          .imgC {
+            opacity: 1;
+            transform: scale(0.95);
+          }
+        }
+
+        .submitBtn {
+          opacity: 1;
+          padding-top: 0.25rem;
+          padding-bottom: 0.25rem;
+          pointer-events: auto;
+        }
+
+        .submitBtnMobile {
+          opacity: 1;
+          pointer-events: auto;
+        }
+      }
+    }
+  }
+}
+
+.privacyAndCookieModal {
+  @include dims(80%, auto);
+  color: #ffffff;
+  margin: 10vw auto;
+  overflow-x: hidden;
+
+  h5 {
+    font-family: VisbyCF-DemiBold;
+    font-size: 2rem;
+    margin-bottom: 2vw;
+  }
+
+  p {
+    font-family: VisbyCF-Regular;
+    font-size: 1rem;
+    line-height: 160%;
+    margin-bottom: 1.5vw;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  small {
+    display: block;
+    font-family: VisbyCF-Regular;
+    font-style: italic;
+    margin-top: 4rem;
+  }
+}
+
+.contactSuccess {
+  @include dims(40vw, 35vw);
+  background: var(--white);
+  border: 10px solid #d9ff51;
+  border-radius: 32px;
+  padding: 0 6vw 1vw 6vw;
+  position: relative;
+
+  @include mobile {
+    @include dims(90vw, auto);
+    border: 3px solid #d9ff51;
+    padding: 0 0 4vw 0;
+  }
+
+  .welcomeAboard {
+    @include dims(22vw, auto);
+    margin-bottom: -5.5vw;
+    z-index: 10;
+
+    @include mobile {
+      @include dims(50vw, auto);
+      margin-bottom: -15vw;
+    }
+  }
+
+  .title {
+    color: var(--black);
+    font-family: VanguardCF-Bold;
+    font-size: 4vw;
+    margin-bottom: 1vw;
+    text-align: center;
+
+    @include mobile {
+      font-size: 10vw;
+      margin-bottom: 4vw;
+    }
+  }
+
+  .text {
+    color: var(--black);
+    font-family: VisbyCF-Medium;
+    font-size: 1.5vw;
+    margin-bottom: 2vw;
+    text-align: center;
+
+    @include mobile {
+      font-size: 3.5vw;
+      margin-bottom: 6vw;
+    }
+  }
+
+  .doneButton {
+    border: 1px solid #000;
+    border-radius: 32px;
+    color: var(--black);
+    font-family: VanguardCF-Medium;
+    font-size: 2.25vw;
+    padding: 0.25rem 6rem 0.5rem 6rem;
+
+    @include hover {
+      &:hover {
+        background: #d9ff51;
+      }
+    }
+
+    @include mobile {
+      font-size: 7vw;
+      padding: 0.15rem 4rem 0.25rem 4rem;
+    }
+  }
+}
+
+.contactSuccess {
+  background: var(--white);
+  border: 10px solid #d9ff51;
+  border-radius: 32px;
+  margin-top: 10vw;
+  padding: 0 3vw 1vw 3vw;
+  position: relative;
+
+  @include mobile {
+    @include dims(90vw, auto);
+    border: 3px solid #d9ff51;
+    padding: 0 8vw 4vw 8vw;
+  }
+
+  .welcomeAboard {
+    @include dims(22vw, auto);
+    margin-top: -5.5vw;
+    padding-bottom: 7vw;
+    z-index: 10;
+
+    @include mobile {
+      @include dims(50vw, auto);
+      margin-top: -15vw;
+      padding-bottom: 17vw;
+    }
+  }
+
+  .title {
+    color: var(--black);
+    font-family: VanguardCF-Bold;
+    font-size: 4vw;
+    margin-bottom: 1vw;
+    text-align: center;
+
+    @include mobile {
+      font-size: 10vw;
+      margin-bottom: 4vw;
+    }
+  }
+
+  .text {
+    color: var(--black);
+    font-family: VisbyCF-Medium;
+    font-size: 1.5vw;
+    margin-bottom: 2vw;
+    text-align: center;
+
+    @include mobile {
+      font-size: 3.5vw;
+      margin-bottom: 6vw;
+    }
+  }
+
+  .doneButton {
+    border: 1px solid #000;
+    border-radius: 32px;
+    color: var(--black);
+    font-family: VanguardCF-Medium;
+    font-size: 2.25vw;
+    padding: 0.25rem 6rem 0.5rem 6rem;
+
+    @include hover {
+      &:hover {
+        background: #d9ff51;
+      }
+    }
+
+    @include mobile {
+      font-size: 7vw;
+      padding: 0.15rem 4rem 0.25rem 4rem;
+    }
+  }
+}
