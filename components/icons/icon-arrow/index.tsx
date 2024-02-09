@@ -5,7 +5,7 @@ interface Props {
 
 const IconArrow = (props: Props) => {
   return (
-    <div style={{ transform: `rotate(${props.rotate}deg)` }}>
+    <div className="inherit-dims" style={{ transform: `rotate(${props.rotate ?? 0}deg)` }}>
       <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 9 9">
         <path
           id="Path_5163"
