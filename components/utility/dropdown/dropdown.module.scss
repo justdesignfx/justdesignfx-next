@@ -1,0 +1,71 @@
+.select {
+  --font-size: #{desktop-vw(14px)};
+  --padding-x: #{desktop-vw(16px)};
+  @include dims(100%);
+  border: 1px solid var(--dire-wolf);
+  border-radius: desktop-vw(64px);
+  position: relative;
+
+  @include mobile {
+    --font-size: #{mobile-vw(14px)};
+    --padding-x: #{mobile-vw(16px)};
+    border-radius: mobile-vw(64px);
+  }
+
+  .selectTrigger {
+    @include position(absolute, 0, 0, 0, 0);
+    color: var(--dire-wolf);
+    font-family: var(--font-visby-cf);
+    font-size: var(--font-size);
+    font-weight: 400;
+    padding-left: var(--padding-x);
+
+    @include mobile {
+      font-size: 1rem;
+    }
+  }
+
+  .options {
+    @include position(absolute, 120%, 0, auto, 0);
+    @include dims(100%, auto);
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: desktop-vw(8px);
+    overflow: hidden;
+    padding: desktop-vw(4px);
+    transition: 400ms all ease;
+    transform: translateZ(desktop-vw(10px));
+    z-index: 100;
+
+    .option {
+      border-radius: desktop-vw(4px);
+      color: var(--cascading-white);
+      font-family: var(--font-visby-cf);
+      font-size: var(--font-size);
+      font-weight: 400;
+      padding: desktop-vw(12px) var(--padding-x);
+      position: relative;
+      transition: 200ms all ease;
+
+      @include mobile {
+        font-size: 1rem;
+      }
+
+      @include hover {
+        &:hover {
+          background-color: var(--cascading-white);
+          color: rgba(0, 0, 0, 0.9);
+        }
+      }
+    }
+  }
+
+  .iconC {
+    @include position(absolute, 50%, var(--padding-x), auto, auto);
+    @include dims(desktop-vw(14px), auto);
+    transform: translateY(-50%);
+
+    @include mobile {
+      @include dims(mobile-vw(14px), auto);
+    }
+  }
+}

@@ -1,5 +1,36 @@
 .items {
-  .card {
-    @include dims(auto, desktop-vw(330px));
+  padding: desktop-vw(100px) desktop-vw(30px);
+}
+
+.loading {
+  font-size: desktop-vw(50px);
+  font-family: var(--font-vanguard-cf);
+  font-weight: 700;
+}
+
+.filterC {
+  padding: 0 desktop-vw(30px);
+  margin-top: desktop-vw(50px);
+
+  > h1 {
+    font-size: desktop-vw(60px);
+    font-family: var(--font-vanguard-cf);
+    font-weight: 900;
+    transform: translateY(-0.2ch);
+
+    @include mobile {
+      font-size: mobile-vw(90px);
+      margin-bottom: mobile-vw(20px);
+      text-align: center;
+      transform: translateY(0);
+    }
+  }
+
+  .dropdownC {
+    @include dims(desktop-vw(290px), desktop-vw(40px));
+
+    @include mobile {
+      @include dims(100%, mobile-vw(40px));
+    }
   }
 }

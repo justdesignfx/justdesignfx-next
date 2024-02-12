@@ -29,7 +29,7 @@ const CardWork = (props: WorkCardProps) => {
         scrollTrigger: {
           markers: false,
           trigger: ref.current,
-          toggleActions: "play reset play reset ",
+          toggleActions: "play reset play reset",
         },
       })
     },
@@ -93,7 +93,5 @@ const CardWork = (props: WorkCardProps) => {
     </Link>
   )
 }
-
-CardWork.displayName = "CardWork"
 
 export default CardWork

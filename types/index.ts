@@ -101,3 +101,8 @@ export interface TeamMemberProps {
   iconImage: string
   linkedin: string
 }
+
+export interface Filter {
+  id: string
+  title: string
+}
