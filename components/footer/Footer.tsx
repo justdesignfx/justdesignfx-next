@@ -1,6 +1,8 @@
 import s from "./footer.module.scss"
 
 import cx from "clsx"
+import { memo } from "react"
+import NextLink from "next/link"
 
 import { FooterReveal } from "@/components/animations/footer-reveal"
 import { Subscribe } from "@/components/footer/subscribe"
@@ -10,10 +12,20 @@ import { IconInstagram } from "@/components/icons/icon-instagram"
 import { IconLinkedin } from "@/components/icons/icon-linkedin"
 import { Link } from "@/components/utility/link"
 
-const Footer = () => {
-  return (
-    <FooterReveal>
-      <footer className={s.footer}>
+import { useContactReasonStore } from "@/lib/store/contact-reason"
+import { ContactReason } from "@/types"
+import { routes } from "@/lib/constants"
+
+interface Props {
+  type: "main" | "contact"
+}
+
+const Footer = (props: Props) => {
+  const { type } = props
+
+  const footerVariations = {
+    main: (
+      <>
         <Subscribe />
 
         <div className={cx(s.contact, "flex items-end justify-start")}>
@@ -24,23 +36,33 @@ const Footer = () => {
               <br /> media inquiries or learn about our career options.
             </p>
             <div className={cx(s.buttons, "flex items-center gap-3")}>
-              <Link
+              <NextLink
                 className={cx(s.btn, "flex items-center justify-center cursor-pointer")}
-                state={{ contactReason: "NEW_PROJECT" }}
-                to="/contact"
+                href={{
+                  pathname: "/contact",
+                  query: {
+                    contactReason: ContactReason.newProject,
+                  },
+                }}
+                as={"/contact"}
               >
                 <span>NEW PROJECT</span>
-              </Link>
-              <Link
+              </NextLink>
+              <NextLink
                 className={cx(s.btn, "flex items-center justify-center cursor-pointer")}
-                state={{ contactReason: "MEDIA_INQUIRY" }}
-                to="/contact"
+                href={{
+                  pathname: "/contact",
+                  query: {
+                    contactReason: ContactReason.mediaInquiry,
+                  },
+                }}
+                as={"/contact"}
               >
                 <span>MEDIA INQUIRY</span>
-              </Link>
+              </NextLink>
               <Link
                 className={cx(s.btn, "flex items-center justify-center cursor-pointer")}
-                external
+                external="true"
                 href="mailto:career@justdesignfx.com"
               >
                 <span>CAREER</span>
@@ -57,7 +79,7 @@ const Footer = () => {
             <div className="flex items-center gap-5">
               <Link
                 className={cx(s.btnGetDirection, "flex items-center gap-5 cursor-pointer")}
-                external={true}
+                external="true"
                 href="https://www.google.com/maps/place/JUSTWork/@41.0234497,29.1265974,15z/data=!4m5!3m4!1s0x0:0x5af99b7e2004cb13!8m2!3d41.0234497!4d29.1265974"
               >
                 <span>GET DIRECTION</span>
@@ -77,7 +99,7 @@ const Footer = () => {
             <div className={s.buttons}>
               <Link
                 className={cx(s.btnGetDirection, "flex items-center gap-5 cursor-pointer")}
-                external
+                external="true"
                 href="https://www.google.com/maps/place/44+W+47th+St+%2322,+New+York,+NY+10036,+USA/@40.757209,-73.9807804,17z/data=!3m1!4b1!4m5!3m4!1s0x89c258ffa808b8d3:0x4aa58f11c530b90a!8m2!3d40.757209!4d-73.9807804"
               >
                 <span>GET DIRECTION</span>
@@ -88,6 +110,74 @@ const Footer = () => {
             </div>
           </div>
         </div>
+      </>
+    ),
+    contact: (
+      <div className={cx(s.footerContact, "flex items-center justify-between")}>
+        <div className={s.col}>
+          <h5>ISTANBUL HQ</h5>
+          <p>
+            JUSTWork Office Campus Balkan Cad. <br />
+            No:62, 34770, ISTANBUL / TURKEY
+          </p>
+          <div className="flex items-center gap-5">
+            <Link
+              className={cx(s.btnGetDirection, "flex items-center gap-5 cursor-pointer")}
+              external="true"
+              href="https://www.google.com/maps/place/JUSTWork/@41.0234497,29.1265974,15z/data=!4m5!3m4!1s0x0:0x5af99b7e2004cb13!8m2!3d41.0234497!4d29.1265974"
+            >
+              <span>GET DIRECTION</span>
+              <div className={s.iconC}>
+                <IconArrow fill="var(--white)" />
+              </div>
+            </Link>
+          </div>
+        </div>
+
+        <div className={s.col}>
+          <h5>NEW YORK HQ</h5>
+          <p>
+            44 W 47th St #22, New York, <br />
+            NY 10036 USA
+          </p>
+          <div className={s.buttons}>
+            <Link
+              className={cx(s.btnGetDirection, "flex items-center gap-5 cursor-pointer")}
+              external="true"
+              href="https://www.google.com/maps/place/44+W+47th+St+%2322,+New+York,+NY+10036,+USA/@40.757209,-73.9807804,17z/data=!3m1!4b1!4m5!3m4!1s0x89c258ffa808b8d3:0x4aa58f11c530b90a!8m2!3d40.757209!4d-73.9807804"
+            >
+              <span>GET DIRECTION</span>
+              <div className={s.iconC}>
+                <IconArrow fill="var(--white)" />
+              </div>
+            </Link>
+          </div>
+        </div>
+
+        <div className={s.col}>
+          <h5>JOIN THE TEAM</h5>
+          <p>
+            Send us your CV, we are always
+            <br /> looking for new talents.
+          </p>
+          <div className={s.buttons}>
+            <Link
+              className={cx(s.btn, "flex items-center justify-center gap-5 cursor-pointer")}
+              external="true"
+              href="mailto:career@justdesignfx.com"
+            >
+              <span>CAREER</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    ),
+  }
+
+  return (
+    <FooterReveal>
+      <footer className={s.footer}>
+        {footerVariations[type]}
 
         <div className={cx(s.copyright, "flex items-center justify-start")}>
           <small className={s.rights}>
@@ -107,14 +197,14 @@ const Footer = () => {
           </div>
 
           <div className={s.col}>
-            <div className={cx(s.social, "flex items-center gap-10")}>
-              <Link className={s.iconC} external href="https://www.instagram.com/justdesignfx/">
+            <div className={cx(s.social, "flex items-center")}>
+              <Link className={s.iconC} external="true" href="https://www.instagram.com/justdesignfx/">
                 <IconInstagram fill="var(--white)" />
               </Link>
-              <Link className={s.iconC} external href="https://www.behance.net/justdesign_fx">
+              <Link className={s.iconC} external="true" href="https://www.behance.net/justdesign_fx">
                 <IconBehance fill="var(--white)" />
               </Link>
-              <Link className={s.iconC} external href="https://tr.linkedin.com/company/just-design-fx">
+              <Link className={s.iconC} external="true" href="https://tr.linkedin.com/company/just-design-fx">
                 <IconLinkedin fill="var(--white)" />
               </Link>
             </div>
@@ -125,4 +215,4 @@ const Footer = () => {
   )
 }
 
-export default Footer
+export default memo(Footer)

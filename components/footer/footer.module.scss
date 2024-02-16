@@ -149,6 +149,121 @@
   }
 }
 
+.footerContact {
+  margin-top: desktop-vw(75px);
+  padding: desktop-vw(50px);
+
+  @include mobile {
+    padding: mobile-vw(50px);
+  }
+
+  .col {
+    flex-shrink: 0;
+
+    @include mobile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 15vw;
+      justify-content: center;
+      width: 100%;
+      margin-bottom: 25vw;
+    }
+
+    &:nth-child(2) {
+      margin-left: desktop-vw(100px);
+      margin-right: auto;
+    }
+
+    > h5 {
+      color: var(--white);
+      font-family: var(--font-visby-cf);
+      font-size: desktop-vw(16px);
+      font-weight: 600;
+      margin-bottom: desktop-vw(20px);
+
+      @include mobile {
+        font-size: 5vw;
+      }
+    }
+
+    > p {
+      color: var(--palladium);
+      font-family: var(--font-visby-cf);
+      font-size: desktop-vw(16px);
+      font-weight: 400;
+      line-height: 1.6;
+      margin-bottom: desktop-vw(50px);
+
+      @include mobile {
+        text-align: center;
+        font-size: 15px;
+        line-height: 36px;
+        width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+
+        br {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .btn {
+    @include dims(desktop-vw(170px), desktop-vw(35px));
+    border-radius: desktop-vw(28px);
+    border: 1px solid var(--palladium);
+    color: var(--white);
+
+    @include hover {
+      &:hover {
+        background-color: var(--isotonic-water);
+        border: 1px solid var(--isotonic-water);
+        color: var(--black);
+      }
+    }
+
+    > span {
+      font-family: var(--font-visby-cf);
+      font-weight: 500;
+      font-size: desktop-vw(16px);
+      white-space: nowrap;
+      text-align: center;
+      transform: translateY(0.1ch);
+
+      @include mobile {
+        font-size: mobile-vw(16px);
+      }
+    }
+  }
+
+  .btnGetDirection {
+    padding: desktop-vw(4px) desltop-vw(12px);
+
+    @include hover {
+      &:hover {
+        .iconC {
+          transform: rotate(45deg);
+        }
+      }
+    }
+
+    > span {
+      color: var(--white);
+      font-family: var(--font-visby-cf);
+      font-size: desktop-vw(14px);
+      font-weight: 500;
+      transform: translateY(0.1ch);
+      white-space: nowrap;
+    }
+
+    .iconC {
+      @include dims(desktop-vw(12px));
+    }
+  }
+}
+
 .subscribeSuccess {
   @include dims(40vw, 35vw);
   background: var(--bleached-silk);
@@ -272,6 +387,7 @@
 
   .social {
     margin-left: desktop-vw(150px);
+    column-gap: desktop-vw(57px);
 
     .iconC {
       @include dims(auto, desktop-vw(32px));
