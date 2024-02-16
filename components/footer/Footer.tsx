@@ -1,10 +1,8 @@
 import s from "./footer.module.scss"
 
 import cx from "clsx"
-import { memo } from "react"
 import NextLink from "next/link"
 
-import { FooterReveal } from "@/components/animations/footer-reveal"
 import { Subscribe } from "@/components/footer/subscribe"
 import { IconArrow } from "@/components/icons/icon-arrow"
 import { IconBehance } from "@/components/icons/icon-behance"
@@ -12,9 +10,7 @@ import { IconInstagram } from "@/components/icons/icon-instagram"
 import { IconLinkedin } from "@/components/icons/icon-linkedin"
 import { Link } from "@/components/utility/link"
 
-import { useContactReasonStore } from "@/lib/store/contact-reason"
 import { ContactReason } from "@/types"
-import { routes } from "@/lib/constants"
 
 interface Props {
   type: "main" | "contact"
@@ -175,44 +171,42 @@ const Footer = (props: Props) => {
   }
 
   return (
-    <FooterReveal>
-      <footer className={s.footer}>
-        {footerVariations[type]}
+    <footer className={s.footer}>
+      {footerVariations[type]}
 
-        <div className={cx(s.copyright, "flex items-center justify-start")}>
-          <small className={s.rights}>
-            &#169; All work copyright of JUST DESIGN FX
-            <sup>&reg;</sup>
-            <span className={s.year}>2024</span>
-          </small>
+      <div className={cx(s.copyright, "flex items-center justify-start")}>
+        <small className={s.rights}>
+          &#169; All work copyright of JUST DESIGN FX
+          <sup>&reg;</sup>
+          <span className={s.year}>2024</span>
+        </small>
 
-          <div className={cx(s.legal, "flex items-center gap-20")}>
-            <Link href="/cookie-policy" className={cx(s.link, "cursor-pointer")}>
-              Cookie Policy
+        <div className={cx(s.legal, "flex items-center gap-20")}>
+          <Link href="/cookie-policy" className={cx(s.link, "cursor-pointer")}>
+            Cookie Policy
+          </Link>
+
+          <Link href="/privacy-policy" className={cx(s.link, "cursor-pointer")}>
+            Privacy Policy
+          </Link>
+        </div>
+
+        <div className={s.col}>
+          <div className={cx(s.social, "flex items-center")}>
+            <Link className={s.iconC} external="true" href="https://www.instagram.com/justdesignfx/">
+              <IconInstagram fill="var(--white)" />
             </Link>
-
-            <Link href="/privacy-policy" className={cx(s.link, "cursor-pointer")}>
-              Privacy Policy
+            <Link className={s.iconC} external="true" href="https://www.behance.net/justdesign_fx">
+              <IconBehance fill="var(--white)" />
             </Link>
-          </div>
-
-          <div className={s.col}>
-            <div className={cx(s.social, "flex items-center")}>
-              <Link className={s.iconC} external="true" href="https://www.instagram.com/justdesignfx/">
-                <IconInstagram fill="var(--white)" />
-              </Link>
-              <Link className={s.iconC} external="true" href="https://www.behance.net/justdesign_fx">
-                <IconBehance fill="var(--white)" />
-              </Link>
-              <Link className={s.iconC} external="true" href="https://tr.linkedin.com/company/just-design-fx">
-                <IconLinkedin fill="var(--white)" />
-              </Link>
-            </div>
+            <Link className={s.iconC} external="true" href="https://tr.linkedin.com/company/just-design-fx">
+              <IconLinkedin fill="var(--white)" />
+            </Link>
           </div>
         </div>
-      </footer>
-    </FooterReveal>
+      </div>
+    </footer>
   )
 }
 
-export default memo(Footer)
+export default Footer

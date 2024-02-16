@@ -11,47 +11,12 @@ type Props = {
 
 const FooterReveal = ({ children }: Props) => {
   const ref = useRef<HTMLDivElement | null>(null)
-  // const tl = useRef(gsap.timeline({ paused: true }))
   const [height, setHeight] = useState(0)
 
   const refElement = useCallback((node: any) => {
     if (node === null) return
     setHeight(node.getBoundingClientRect().height)
   }, [])
-
-  // useIsomorphicLayoutEffect(() => {
-  //   const ctx = gsap.context(() => {
-  //     tl.current
-  //       .from(
-  //         ".wrapper",
-  //         {
-  //           ease: "none",
-  //           yPercent: -50,
-  //         },
-  //         "s"
-  //       )
-  //       .to(
-  //         ".overlay",
-  //         {
-  //           ease: "none",
-  //           opacity: 0,
-  //         },
-  //         "s"
-  //       )
-
-  //     ScrollTrigger.create({
-  //       markers: false,
-  //       animation: tl.current,
-  //       id: "footer",
-  //       trigger: ref.current,
-  //       start: "top bottom",
-  //       end: () => `top bottom-=${height}`,
-  //       scrub: true,
-  //     })
-  //   }, ref)
-
-  //   return () => ctx.revert()
-  // }, [height])
 
   useGSAP(
     () => {
