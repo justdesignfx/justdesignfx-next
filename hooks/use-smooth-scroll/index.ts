@@ -1,7 +1,9 @@
-import { useLenisStore } from "@/lib/store/lenis"
-import Lenis from "@studio-freight/lenis"
 import { useRef } from "react"
+
+import Lenis from "@studio-freight/lenis"
 import { useIsomorphicLayoutEffect } from "usehooks-ts"
+
+import { useLenisStore } from "@/lib/store/lenis"
 
 const useSmoothScroll = () => {
   // const [lenis, setLenis] = useState<Lenis | null>()
@@ -39,18 +41,11 @@ const useSmoothScroll = () => {
   }, [])
 
   useIsomorphicLayoutEffect(() => {
-    if (lenisStore.isStopped) {
-      lenis?.stop()
-    } else {
-      lenis?.start()
-    }
+    lenisStore.isStopped ? lenis?.stop() : lenis?.start()
   }, [lenisStore.isStopped])
 
   useIsomorphicLayoutEffect(() => {
-    if (lenisStore.reset) {
-      lenis?.scrollTo(0, { immediate: true })
-    }
-
+    if (lenisStore.reset) lenis?.scrollTo(0, { immediate: true })
     lenisStore.setReset(false)
   }, [lenisStore.reset])
 }
