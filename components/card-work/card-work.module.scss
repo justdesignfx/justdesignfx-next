@@ -51,7 +51,7 @@
     color: var(--black);
     font-family: var(--font-vanguard-cf);
     font-size: desktop-vw(50px);
-    font-weight: 400;
+    font-weight: 500;
     margin-bottom: desktop-vw(16px);
     text-align: left;
   }
@@ -84,7 +84,7 @@
     .cardTitle {
       font-family: var(--font-visby-cf);
       font-size: desktop-vw(25px);
-      font-weight: 900;
+      font-weight: 400;
       text-align: center;
 
       @include mobile {

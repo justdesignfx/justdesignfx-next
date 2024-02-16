@@ -3,16 +3,17 @@ import s from "./card-work.module.scss"
 import { CustomEase, gsap } from "@/lib/gsap"
 import { useGSAP } from "@gsap/react"
 import cx from "clsx"
-import { useRef } from "react"
+import { Fragment, useRef } from "react"
 
 import { IconDot } from "@/components/icons/icon-dot"
 import { Img } from "@/components/utility/img"
 import { Link } from "@/components/utility/link"
 import { Video } from "@/components/utility/video/"
 
+import { isEven } from "@/lib/utils"
 import { WorkCardProps } from "@/types"
 
-import { isEven } from "@/lib/utils"
+// TODO: Images needs width and height properties from server
 
 const CardWork = (props: WorkCardProps) => {
   const { awardImage, mediaSrcDesktop, mediaSrcMobile, mediaType, services, title, url, index, ...other } = props
@@ -56,9 +57,9 @@ const CardWork = (props: WorkCardProps) => {
             {mediaType === "image" && (
               <>
                 <Img
+                  alt="Project Cover Photo"
                   className="object-cover"
                   src={mediaSrcDesktop}
-                  alt="Project Visual"
                   height={500}
                   width={500}
                   loading="lazy"
@@ -75,16 +76,14 @@ const CardWork = (props: WorkCardProps) => {
           <div className={cx("flex flex-wrap gap-2 items-center w-11/12")}>
             {services?.map((category, i) => {
               return (
-                <>
-                  <small key={i} className={s.cardTag}>
-                    {category}
-                  </small>
+                <Fragment key={i}>
+                  <small className={s.cardTag}>{category}</small>
                   {i !== services.length - 1 && (
                     <span className={cx(s.iconC, "flex items-center justify-center")}>
                       <IconDot fill="var(--black)" />
                     </span>
                   )}
-                </>
+                </Fragment>
               )
             })}
           </div>
