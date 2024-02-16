@@ -1,7 +1,7 @@
 import s from "./works.module.scss"
 
 import cx from "clsx"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { CardWork } from "@/components/card-work"
 import { Searchbox } from "@/components/searchbox"
@@ -13,6 +13,8 @@ import { all as getClientTypes } from "@/api/queries/filter-client-types"
 import { all as getServices } from "@/api/queries/services"
 import { useAll } from "@/api/queries/works"
 import useDebounce from "@/hooks/use-debounce"
+import { useFilterStore } from "@/lib/store/filter"
+import { useRouter } from "next/router"
 
 interface Props {
   clientTypes: Filter[]
@@ -20,17 +22,35 @@ interface Props {
 }
 
 const Works = ({ clientTypes, services }: Props) => {
-  const [service, setService] = useState("")
-  const [clientType, setClientType] = useState("")
+  const router = useRouter()
+  const { service, setService, clientType, setClientType, clearFilters } = useFilterStore()
   const [keyword, setKeyword] = useState("")
   const debouncedKeyword = useDebounce(keyword, 500)
-  const { isLoading, data } = useAll(debouncedKeyword, clientType, service)
+  const { isLoading, data } = useAll(debouncedKeyword, clientType, service as string)
 
   function getSelectedOption(options: Filter[], id: Filter["id"] | null) {
     return options.find((option) => {
       return option.id === id
     })
   }
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      clearFilters()
+    }
+
+    router.events.on("routeChangeStart", handleRouteChange)
+
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange)
+    }
+  }, [router, clearFilters])
+
+  // useEffect(() => {
+  //   return () => {
+  //     clearFilters()
+  //   }
+  // }, [clearFilters])
 
   return (
     <DefaultLayout
@@ -49,7 +69,7 @@ const Works = ({ clientTypes, services }: Props) => {
               options={services}
               onChange={setService}
               defaultValue={{ id: "", title: "Type of Work" }}
-              selectedOption={getSelectedOption(services, service)}
+              selectedOption={getSelectedOption(services, service as string)}
             />
           </div>
         )}
