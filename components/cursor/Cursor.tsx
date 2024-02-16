@@ -6,7 +6,7 @@ import cn from "clsx"
 import { useIsomorphicLayoutEffect } from "usehooks-ts"
 import { useRouter } from "next/router"
 
-import useMousePosition from "@/hooks/useMousePosition"
+import useMousePosition from "@/hooks/use-mouse-position"
 import { useCursorStore } from "@/lib/store/cursor"
 import { CursorType } from "@/types"
 import { useGSAP } from "@gsap/react"

@@ -1,6 +1,6 @@
 import { ReactNode } from "react"
 
-import useSmoothScroll from "@/hooks/useSmoothScroll"
+import useSmoothScroll from "@/hooks/use-smooth-scroll"
 
 type Props = {
   children: ReactNode
