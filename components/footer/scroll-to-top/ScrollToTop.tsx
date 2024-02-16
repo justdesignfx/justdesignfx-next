@@ -43,8 +43,8 @@ const ScrollToTop = () => {
             d="M63.573,112.569c2.162,5.562,6.317,12.256,13.007,11.106,5.309-.693,9-4.386,13.157-7.617,8.54-6.695,17.309-1.155,25.622,2.077,4.847,1.847,9.465-2.077,11.046-6.479"
             fill="none"
             stroke="#231f20"
-            stroke-miterlimit="10.005"
-            stroke-width="1.378"
+            strokeMiterlimit="10.005"
+            strokeWidth="1.378"
           />
           <path
             className={s.mouth}
@@ -53,8 +53,8 @@ const ScrollToTop = () => {
             d="M60.266,111.39a3.06,3.06,0,0,0,3.191,1.256A3.122,3.122,0,0,0,65.81,110.1"
             fill="none"
             stroke="#231f20"
-            stroke-miterlimit="10.005"
-            stroke-width="1.378"
+            strokeMiterlimit="10.005"
+            strokeWidth="1.378"
           />
           <path
             className={s.mouth}
@@ -63,8 +63,8 @@ const ScrollToTop = () => {
             d="M130.017,111.227a2.482,2.482,0,0,1-3.181.588,4.382,4.382,0,0,1-2.339-3.065"
             fill="none"
             stroke="#231f20"
-            stroke-miterlimit="10.005"
-            stroke-width="1.378"
+            strokeMiterlimit="10.005"
+            strokeWidth="1.378"
           />
           <path
             className={s.eye}
@@ -86,8 +86,8 @@ const ScrollToTop = () => {
             d="M54.211,75.362a47.4,47.4,0,1,1,17.06,64.826A47.4,47.4,0,0,1,54.211,75.362Z"
             fill="none"
             stroke="#000"
-            stroke-miterlimit="10.008"
-            stroke-width="1.251"
+            strokeMiterlimit="10.008"
+            strokeWidth="1.251"
           />
           <rect
             id="Rectangle_2311"
