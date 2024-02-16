@@ -16,6 +16,11 @@
         transform: scale(1.025) translateY(-50%) rotate(-5deg);
       }
     }
+
+    @include mobile {
+      @include position(absolute, 50%, auto, auto, mobile-vw(8px));
+      @include dims(mobile-vw(80px));
+    }
   }
 
   .link {
