@@ -5,19 +5,15 @@ import { useGSAP } from "@gsap/react"
 import cx from "clsx"
 import { memo, useRef } from "react"
 
-import { TeamMemberProps } from "@/types"
+import { CardMember } from "@/components/card-member"
 
-import { IconLinkedin } from "@/components/icons/icon-linkedin"
-import { Img } from "@/components/utility/img"
-import { Link } from "@/components/utility/link"
+import { TeamMemberProps } from "@/types"
 
 interface Props {
   items: TeamMemberProps[]
 }
 
 const TeamMembers = (props: Props) => {
-  const { items } = props
-
   const ref = useRef(null)
 
   useGSAP(
@@ -46,12 +42,12 @@ const TeamMembers = (props: Props) => {
               ease: "none",
             })
 
-            gsap.to(".keep-scrolling", {
-              opacity: self.progress === 0 || self.progress === 1 ? 0 : 1,
-              xPercent: gsap.utils.mapRange(-10000, 10000, -1, 1, Math.abs(self.getVelocity())) * self.direction * -1,
-              transform: () =>
-                `skew(${gsap.utils.mapRange(-10000, 10000, -10, 10, Math.abs(self.getVelocity())) * self.direction}deg`,
-            })
+            // gsap.to(".keep-scrolling", {
+            //   opacity: self.progress === 0 || self.progress === 1 ? 0 : 1,
+            //   xPercent: gsap.utils.mapRange(-10000, 10000, -1, 1, Math.abs(self.getVelocity())) * self.direction * -1,
+            //   transform: () =>
+            //     `skew(${gsap.utils.mapRange(-10000, 10000, -10, 10, Math.abs(self.getVelocity())) * self.direction}deg`,
+            // })
 
             gsap.to(".progress-bar", {
               opacity: self.progress === 0 || self.progress === 1 ? 0 : 1,
@@ -62,58 +58,25 @@ const TeamMembers = (props: Props) => {
         },
       })
     },
-    { scope: ref, dependencies: [items] }
+    { scope: ref, dependencies: [props.items] }
   )
 
   return (
     <section className={cx(s.teamMembers, "flex items-center")} ref={ref}>
-      {items.map((member, i) => {
+      {props.items.map((member, i) => {
         return (
-          <div className={cx(s.item, { [s.last]: i === items.length - 1 }, "item", "flex-shrink-0")} key={i}>
-            <div className={cx(s.memberCard, "flex items-center gap-7")}>
-              <div className={cx(s.imgC, "flex-shrink-0")}>
-                <div className={s.emojiC}>
-                  <Img
-                    src={member.iconImage}
-                    className={cx(s.emoji, "object-contain")}
-                    alt="Team Member Icon"
-                    height={100}
-                    width={100}
-                  />
-                </div>
-                <div className={s.memberPic}>
-                  <Img src={member.profileImage} alt="Team Member" height={500} width={500} />
-                </div>
-              </div>
-
-              <div className={cx(s.info, "flex flex-col items-start")}>
-                <h6 className={s.credentials}>
-                  {member.name}
-                  <br /> {member.surname}
-                </h6>
-
-                {member.role.split("<br>").map((par: string, i: number) => {
-                  return (
-                    <small className={s.role} key={i}>
-                      {par}
-                    </small>
-                  )
-                })}
-
-                {member.linkedin && (
-                  <Link className={cx(s.iconC, "cursor-pointer")} href={member.linkedin} external>
-                    <IconLinkedin fill="var(--white)" />
-                  </Link>
-                )}
-              </div>
-            </div>
+          <div
+            className={cx(s.item, { [s.last]: i === props.items.length - 1 }, "item", "flex-shrink-0")}
+            key={member.id}
+          >
+            <CardMember {...member} />
           </div>
         )
       })}
 
       <div className={cx(s.progressBar, "progress-bar")}></div>
 
-      <div className={cx(s.keepScrolling)}>
+      {/* <div className={cx(s.keepScrolling)}>
         <div className={cx(s.transform, "keep-scrolling flex items-center")}>
           <p>KEEP SCROOOOOOOOOOLLING!</p>
           <p>KEEP SCROOOOOOOOOOLLING!</p>
@@ -132,7 +95,7 @@ const TeamMembers = (props: Props) => {
           <p>KEEP SCROOOOOOOOOOLLING!</p>
           <p>KEEP SCROOOOOOOOOOLLING!</p>
         </div>
-      </div>
+      </div> */}
     </section>
   )
 }

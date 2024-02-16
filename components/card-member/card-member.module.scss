@@ -1,0 +1,75 @@
+.cardMember {
+  margin-left: desktop-vw(200px);
+
+  .imgC {
+    @include dims(desktop-vw(360px), desktop-vw(440px));
+    position: relative;
+
+    .memberPic {
+      @include dims(100%);
+      border-radius: desktop-vw(16px);
+      border: 2px solid var(--white);
+      overflow: hidden;
+
+      @include mobile {
+        border-radius: 15vw;
+        width: 90vw;
+        height: 100vw;
+      }
+    }
+
+    .emojiC {
+      @include position(absolute, 0, 0, auto, auto);
+      @include dims(desktop-vw(130px));
+      background-image: url("../../public/img/emoji-bg.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100%;
+      transform: translate(50%, -50%);
+      z-index: 10;
+
+      .emoji {
+        @include position(absolute, 50%, 50%, auto, auto);
+        @include dims(desktop-vw(45px));
+        transform: translate(50%, -50%);
+      }
+    }
+  }
+
+  .info {
+    color: var(--white);
+
+    .credentials {
+      font-family: var(--font-vanguard-cf);
+      font-size: desktop-vw(64px);
+      font-weight: 700;
+      margin-bottom: desktop-vw(20px);
+      width: desktop-vw(350px);
+
+      @include mobile {
+        font-size: 11vw;
+
+        br {
+          display: none;
+        }
+      }
+    }
+
+    .role {
+      font-family: var(--font-visby-cf);
+      font-size: desktop-vw(16px);
+      margin-bottom: desktop-vw(30px);
+      text-transform: uppercase;
+      white-space: nowrap;
+
+      @include mobile {
+        font-size: 5.5vw;
+        margin-top: -1vw;
+      }
+    }
+
+    .iconC {
+      @include dims(desktop-vw(24px));
+    }
+  }
+}
