@@ -2,14 +2,13 @@ import s from "./home/home.module.scss"
 
 import cx from "clsx"
 
-import { DefaultLayout } from "@/layouts/default"
-
 import { Parallax } from "@/components/animations/parallax"
+import { ScrollSkew } from "@/components/animations/scroll-skew"
 import { CardWork } from "@/components/card-work"
-import { ScrollSkew } from "@/components/scroll-skew"
 import { Img } from "@/components/utility/img"
 import { Link } from "@/components/utility/link"
 import { Video } from "@/components/utility/video"
+import { DefaultLayout } from "@/layouts/default"
 
 import { all } from "@/api/queries/latest-works"
 import { WorkCardProps } from "@/types"
@@ -32,11 +31,11 @@ export default function Home({ works }: Props) {
       }}
     >
       <section className={cx(s.hero, "grid  grid-cols-2 p-lg")}>
-        <div className={s.text}>
+        <div className={cx(s.text)}>
           <h1 className="flex flex-col">
             <span className={cx(s.lookAhead, "mr-auto")}>LOOK AHEAD</span>
-            <span className={s.theFuture}>
-              THE <i className={s.italic}>future</i>
+            <span className={cx(s.theFuture)}>
+              THE <i className={cx(s.italic, "inline-block")}>future</i>
               <br />
             </span>
             <span className={cx(s.hasArrived)}>HAS ARRIVED.</span>
@@ -49,7 +48,7 @@ export default function Home({ works }: Props) {
         </div>
 
         <div className={s.waterBlob}>
-          <Parallax speedX={0} speedY={-1}>
+          <Parallax speedY={-1}>
             <div>
               <Img src={homeBlob} alt="Blob" />
             </div>
@@ -70,10 +69,10 @@ export default function Home({ works }: Props) {
         </ScrollSkew>
 
         <div className={cx(s.items, "grid grid-cols-2 p-md gap-y-xl gap-x-md")}>
-          {works.map((item) => {
+          {works.map((item, i) => {
             return (
-              <div className={cx(s.card, "cursor-pointer")} key={item.id}>
-                <CardWork {...item} />
+              <div className={cx(s.card, "cursor-pointer w-full h-full")} key={item.id}>
+                <CardWork {...item} index={i} />
               </div>
             )
           })}
@@ -105,7 +104,7 @@ export default function Home({ works }: Props) {
           <div className={s.arrowContainer}>
             <Img className={s.arrow} src={seeAllArrow} alt="Arrow" />
           </div>
-          <Parallax speedX={0} speedY={-1}>
+          <Parallax speedY={-1}>
             <div className={s.smileyContainer}>
               <Img className={s.jdSmiley} src={jdSmile} alt="Smiley" />
             </div>

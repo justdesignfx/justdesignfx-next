@@ -51,7 +51,7 @@
   .waterBlob {
     @include position(absolute, auto, auto, desktop-vw(-400px), 0);
     @include dims(desktop-vw(800px), auto);
-    transform: rotate(20deg);
+    // transform: rotate(20deg);
   }
 }
 
@@ -145,8 +145,8 @@
   }
 
   .jdSmileyContainer {
-    @include dims(100%, 45vw);
-    margin-bottom: -22.5vw;
+    @include dims(100%, desktop-vw(500px));
+    margin-bottom: desktop-vw(-200px);
     position: relative;
 
     .seeAllWorkBtnC {
@@ -187,7 +187,7 @@
     .smileyContainer {
       @include position(absolute, 0, auto, auto, 50%);
       @include dims(50vw, auto);
-      transform: translate(-70%, 20%);
+      transform: translate(-70%, 25%);
 
       .jdSmiley {
         @include dims(100%);
