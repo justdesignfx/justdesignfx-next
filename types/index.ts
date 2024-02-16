@@ -4,11 +4,6 @@ export interface Seo {
   title: NextSeoProps["title"]
   description: NextSeoProps["description"]
 }
-
-type ComponentList = "mediaContainer" | "imageReveal" | "mediaSlider" | "asymmetricMediaContainer" | "workInfo"
-
-export type CursorType = "default" | "click"
-
 export interface WorkCardProps {
   index?: number
   awardImage: string
@@ -111,8 +106,17 @@ export interface ContactForm {
   message: string
   contactReason: ContactReason | null
 }
-
 export enum ContactReason {
   newProject = "NEW_PROJECT",
   mediaInquiry = "MEDIA_INQUIRY",
 }
+export enum WorkDetailComponent {
+  asymmetricMediaContainer = "asymetricMediaContainer",
+  imageReveal = "imageReveal",
+  mediaContainer = "mediaContainer",
+  mediaSlider = "mediaSlider",
+  workInfo = "workInfo",
+}
+type ComponentList = "mediaContainer" | "imageReveal" | "mediaSlider" | "asymmetricMediaContainer" | "workInfo"
+
+export type CursorType = "default" | "click"
