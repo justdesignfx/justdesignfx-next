@@ -15,7 +15,7 @@ interface Props {
   items: TeamMemberProps[]
 }
 
-const TeamMembers = memo((props: Props) => {
+const TeamMembers = (props: Props) => {
   const { items } = props
 
   const ref = useRef(null)
@@ -135,8 +135,8 @@ const TeamMembers = memo((props: Props) => {
       </div>
     </section>
   )
-})
+}
 
 TeamMembers.displayName = "TeamMembers"
 
-export default TeamMembers
+export default memo(TeamMembers)
