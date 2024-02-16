@@ -12,19 +12,21 @@ import { all as getTeamMembers } from "@/api/queries/team-members"
 import { Parallax } from "@/components/animations/parallax"
 import { IconArrowDown } from "@/components/icons/icon-arrow-down"
 import { Marquee } from "@/components/marquee"
-import { TeamMembers } from "@/components/team-members"
 import { Img } from "@/components/utility/img"
 import { Link } from "@/components/utility/link"
 import { DefaultLayout } from "@/layouts/default"
 
+import { useFilterStore } from "@/lib/store/filter"
 import { AwardProps, ServiceProps, TeamMemberProps } from "@/types"
 
+import IsomorphicTeamMembers from "@/components/isomorphic-team-members/IsomorphicTeamMembers"
 import allServices from "@/public/img/all-services.svg"
 import companies from "@/public/img/companies.png"
 import sun from "@/public/img/references-sun.svg"
 import teamBlob from "@/public/img/team-blob.png"
 import teamEyeUp from "@/public/img/team-eye-up.svg"
 import teamSmile from "@/public/img/team-smile.png"
+import Float from "@/components/animations/float"
 
 interface Props {
   services: ServiceProps[]
@@ -35,6 +37,7 @@ interface Props {
 const About = (props: Props) => {
   const { services, awards, teamMembers } = props
   const preTeamRef = useRef(null)
+  const { service, setService } = useFilterStore()
 
   useGSAP(
     () => {
@@ -69,47 +72,20 @@ const About = (props: Props) => {
     >
       <section className={cx(s.intro, "flex flex-col items-center")}>
         <h1>
-          <span className="block we-are">
-            <span className="we-are-letter">W</span>
-            <span className="we-are-letter">E</span>
-            <span className="we-are-letter invisible">E</span>
-            <span className="we-are-letter">A</span>
-            <span className="we-are-letter">R</span>
-            <span className="we-are-letter">E</span>
-            <span className="letter invisible">E</span>
-            <span className={cx("inline", s.italic)}>
-              <span className="just-letter">j</span>
-              <span className="just-letter">u</span>
-              <span className="just-letter">s</span>
-              <span className="just-letter">t</span>
-            </span>
+          <span className="block">
+            WE ARE
+            <span className={cx("block tablet:inline-block", s.italic)}>just</span>
           </span>
-          <span className="block relentless">
-            <span className="relentless-letter">R</span>
-            <span className="relentless-letter">E</span>
-            <span className="relentless-letter">L</span>
-            <span className="relentless-letter">E</span>
-            <span className="relentless-letter">N</span>
-            <span className="relentless-letter">T</span>
-            <span className="relentless-letter">L</span>
-            <span className="relentless-letter">E</span>
-            <span className="relentless-letter">S</span>
-            <span className="relentless-letter">S</span>
-          </span>
-          <span className={cx("block", "dreamers", s.italic)}>
-            <span className="dreamers-letter">d</span>
-            <span className="dreamers-letter">r</span>
-            <span className="dreamers-letter">e</span>
-            <span className="dreamers-letter">a</span>
-            <span className="dreamers-letter">m</span>
-            <span className="dreamers-letter">e</span>
-            <span className="dreamers-letter">r</span>
-            <span className="dreamers-letter">s</span>
-            <span className="dreamers-letter">.</span>
-          </span>
+          <span className="block">RELENTLESS</span>
+          <span className={cx("block", s.italic)}>dreamers.</span>
         </h1>
 
-        <div className={cx(s.flyingTextC, "flex items-center justify-between")}>
+        <div
+          className={cx(
+            s.flyingTextC,
+            "flex flex-col tablet:flex-row items-center justify-between tablet:justify-center"
+          )}
+        >
           <p className="text-left">
             <span>
               We design iconic brands with future impact.<span className={s.emoji}>🚀</span>
@@ -141,44 +117,39 @@ const About = (props: Props) => {
           </div>
         </div>
 
-        <div className={s.downArrowMobile}>
+        <div className={cx(s.downArrowMobile, "flex tablet:hidden")}>
           <IconArrowDown fill="var(--white)" />
         </div>
 
-        <div className={cx(s.blob, "blob")}>
+        <div className={cx(s.blob, "blob pointer-events-none")}>
           <Parallax speedY={-0.5}>
             <Img src={teamBlob} alt="Water Blob" />
           </Parallax>
         </div>
 
-        <div className={cx(s.smile, "smile")}>
+        <div className={cx(s.smile, "smile pointer-events-none")}>
           <Parallax speedY={-0.25}>
             <Img src={teamSmile} alt="Smiley" />
           </Parallax>
         </div>
 
         <div className={s.whatWeDo}>
-          <Parallax speedY={-1.25}>
+          <Parallax speedY={-1}>
             <h2 className="text-center">
               WHAT
-              <br /> WE DO.
+              <br className={cx("block tablet:hidden")} /> WE DO.
             </h2>
           </Parallax>
         </div>
       </section>
 
-      <section className={s.fields}>
-        <div className={cx(s.items, "grid grid-cols-2 mx-auto my-xl")}>
+      <section className={cx(s.services, "flex")}>
+        <div className={cx(s.items, "flex flex-col tablet:grid grid-cols-2 mx-auto")}>
           {services.map((service: any, i: number) => {
             return (
               <div className={s.fieldCard} key={service.id}>
                 <div className={cx(s.inner, "flex flex-col items-start justify-start cursor-pointer")}>
-                  <Link
-                    // onMouseDown={() => saveFilter(service.id)}
-                    href="/works"
-                    // target="_blank"
-                    // rel="noopener noreferrer"
-                  >
+                  <Link href="/works" onClick={() => setService(service.id)}>
                     <small className={s.index}>{`0${i + 1}.`}</small>
                     {service.title.split("<br>").map((word: string, i: number) => {
                       return (
@@ -269,7 +240,7 @@ const About = (props: Props) => {
         </div>
       </section>
 
-      <section className={s.references}>
+      <section className={cx(s.references, "flex flex-col items-center")}>
         <h3 className={cx(s.textWrapper, "mx-auto")}>
           <span className="block">
             SOME OF <small className="inline">OUR</small>
@@ -278,7 +249,9 @@ const About = (props: Props) => {
         </h3>
 
         <div className={cx(s.imgC, s.referencesSun)}>
-          <Img alt="Smiling Sun Sticker" className="object-contain" src={sun} />
+          <Float amountY={10} amountRotate={3}>
+            <Img alt="Smiling Sun Sticker" className="object-contain" src={sun} />
+          </Float>
         </div>
 
         <div className={cx(s.imgC, s.companies, "mx-auto")}>
@@ -351,7 +324,7 @@ const About = (props: Props) => {
         </div> */}
       </section>
 
-      <TeamMembers items={teamMembers} />
+      <IsomorphicTeamMembers items={teamMembers} />
     </DefaultLayout>
   )
 }

@@ -2,22 +2,19 @@
   position: relative;
 
   @include mobile {
-    padding: 17vw;
+    margin: mobile-vw(30px) 0;
   }
 
   > h1 {
+    @include dims(desktop-vw(800px), auto);
     color: var(--white);
-    width: desktop-vw(800px);
     font-size: desktop-vw(144px);
     font-family: var(--font-vanguard-cf);
     font-weight: 900;
 
     @include mobile {
-      font-size: 20vw;
-
-      br {
-        display: inline-block;
-      }
+      @include dims(auto);
+      font-size: mobile-vw(70px);
     }
 
     > span {
@@ -25,9 +22,7 @@
         text-align: left;
 
         @include mobile {
-          font-size: desktop-vw(300px);
           text-align: center;
-          margin-bottom: 5vw;
         }
       }
 
@@ -36,26 +31,20 @@
         transform: translateY(-1vw);
 
         @include mobile {
-          font-size: 19vw;
           transform: translateY(0);
           text-align: center;
         }
       }
 
       &:nth-child(3) {
-        margin-right: 9vw;
-        text-align: right;
-        transform: translateY(-3vw);
+        margin-left: desktop-vw(100px);
+        transform: translateY(desktop-vw(-40px));
 
         @include mobile {
-          transform: translateY(-1vw);
+          margin-left: unset;
+          transform: unset;
           text-align: center;
-          margin-right: 0;
         }
-      }
-
-      span {
-        display: inline-block;
       }
     }
 
@@ -71,11 +60,9 @@
     margin-right: desktop-vw(100px);
 
     @include mobile {
-      width: 100vw;
-      padding-top: 20vw;
-      flex-direction: column;
-      transform: translateX(0);
-      margin: 0;
+      @include dims(auto);
+      margin-top: mobile-vw(150px);
+      margin-right: unset;
     }
 
     > p {
@@ -87,14 +74,17 @@
       line-height: 2;
 
       @include mobile {
-        @include dims(90vw, auto);
-        font-weight: 700;
-        font-size: 18px;
+        @include dims(mobile-vw(300px), auto);
+        font-size: mobile-vw(16px);
       }
 
       > span {
         display: block;
         margin-bottom: desktop-vw(20px);
+
+        @include mobile {
+          margin-bottom: mobile-vw(20px);
+        }
 
         &:last-child {
           margin-bottom: 0;
@@ -105,6 +95,7 @@
         max-width: desktop-vw(300px);
 
         @include mobile {
+          max-width: unset;
           text-align: center;
         }
       }
@@ -114,14 +105,18 @@
         max-width: desktop-vw(290px);
 
         @include mobile {
-          margin-top: 0;
+          margin-top: mobile-vw(50px);
+          max-width: unset;
           text-align: center;
-          max-width: none;
         }
       }
 
       .emoji {
         padding: 0 desktop-vw(8px);
+
+        @include mobile {
+          padding: 0 mobile-vw(8px);
+        }
       }
     }
   }
@@ -168,12 +163,8 @@
   }
 
   .downArrowMobile {
-    display: none;
-
-    @include mobile {
-      display: block;
-      margin-top: 20vw;
-    }
+    @include dims(mobile-vw(125px));
+    margin-top: mobile-vw(50px);
   }
 
   .blob {
@@ -181,8 +172,8 @@
     @include dims(desktop-vw(800px), auto);
 
     @include mobile {
-      top: 9.5%;
-      width: 95vw;
+      @include position(absolute, mobile-vw(125px), 0, auto, auto);
+      @include dims(mobile-vw(410px), auto);
     }
   }
 
@@ -191,20 +182,20 @@
     @include dims(desktop-vw(200px), auto);
 
     @include mobile {
-      top: 12%;
-      right: -4vw;
-      width: 25vw;
+      @include position(absolute, mobile-vw(100px), mobile-vw(-30px), auto, auto);
+      @include dims(mobile-vw(120px), auto);
+      z-index: -1;
     }
   }
 
   .whatWeDo {
     @include dims(100%, auto);
     color: var(--white);
-    position: relative;
     padding-top: desktop-vw(200px);
+    position: relative;
 
     @include mobile {
-      padding: 10vw 0 0 0;
+      padding-top: mobile-vw(100px);
     }
 
     h2 {
@@ -214,45 +205,38 @@
       transform: translateY(desktop-vw(100px));
 
       @include mobile {
-        font-size: 37vw;
-        line-height: 90%;
-        transform: translateY(0);
-      }
-
-      br {
-        display: none;
-
-        @include mobile {
-          display: block;
-        }
+        font-size: mobile-vw(120px);
+        line-height: 0.9;
+        transform: translateY(mobile-vw(100px));
       }
     }
   }
 }
 
-.fields {
+.services {
   background: var(--white);
   border-radius: desktop-vw(64px);
   position: relative;
-  display: flex;
 
   @include mobile {
-    border-radius: 28px;
-    padding: 15vw 2vw;
-
-    grid-template-columns: repeat(1, 1fr);
+    border-radius: mobile-vw(32px);
   }
 
   &:before {
     content: "";
     @include position(absolute, 0, 0, auto, 0);
-    @include dims(100%, 350px);
-    background: linear-gradient(0deg, #000, rgb(255, 255, 255, 0));
+    @include dims(100%, desktop-vw(350px));
+    background: linear-gradient(0deg, var(--black), var(--black-transparent));
     transform: translateY(-100%);
   }
 
   .items {
+    margin: desktop-vw(100px) auto;
     position: relative;
+
+    @include mobile {
+      margin: mobile-vw(50px) auto;
+    }
 
     &:before {
       content: "";
@@ -261,6 +245,10 @@
       background-color: var(--black);
       transform: translate(-50%, -50%);
       z-index: 0;
+
+      @include mobile {
+        display: none;
+      }
     }
   }
 
@@ -271,6 +259,12 @@
     padding: desktop-vw(20px);
     z-index: 100;
 
+    @include mobile {
+      @include dims(100%, auto);
+      border-radius: mobile-vw(48px);
+      padding: mobile-vw(8px);
+    }
+
     .inner {
       @include dims(100%);
       background: var(--white);
@@ -278,6 +272,11 @@
       border: 2px solid var(--black);
       padding: desktop-vw(32px);
       position: relative;
+
+      @include mobile {
+        border-radius: mobile-vw(32px);
+        padding: mobile-vw(50px) mobile-vw(20px);
+      }
 
       @include hover {
         &:hover {
@@ -298,12 +297,6 @@
           }
         }
       }
-    }
-
-    @include mobile {
-      @include dims(100%, auto);
-      border-radius: 24px;
-      padding: 7vw;
     }
 
     .index {
@@ -498,10 +491,6 @@
   position: relative;
   overflow: hidden;
 
-  @include mobile {
-    padding: 10vw 0;
-  }
-
   > h3 {
     @include dims(desktop-vw(800px), auto);
     color: var(--white);
@@ -511,14 +500,19 @@
     margin-bottom: desktop-vw(200px);
 
     @include mobile {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
+      @include dims(auto);
+      font-size: mobile-vw(80px);
+      margin: 0 mobile-vw(20px);
+      margin-bottom: mobile-vw(50px);
+      order: 2;
     }
 
     small {
       font-size: desktop-vw(64px);
+
+      @include mobile {
+        font-size: mobile-vw(45px);
+      }
     }
 
     .italic {
@@ -534,9 +528,10 @@
       @include dims(desktop-vw(300px));
 
       @include mobile {
-        @include position(relative, auto, auto, auto, auto);
-        @include dims(65vw, auto);
-        margin: 10vw 0;
+        @include position(relative, unset, unset, unset, unset);
+        @include dims(mobile-vw(270px));
+        margin-bottom: mobile-vw(50px);
+        order: 1;
       }
     }
 
@@ -546,7 +541,9 @@
       flex-shrink: 0;
 
       @include mobile {
-        display: none;
+        @include dims(95%, auto);
+        order: 3;
+        transform: unset;
       }
     }
   }
@@ -645,6 +642,11 @@
     .imgC {
       @include dims(desktop-vw(160px), auto);
       margin-bottom: desktop-vw(16px);
+
+      @include mobile {
+        @include dims(mobile-vw(160px), auto);
+        margin-bottom: mobile-vw(16px);
+      }
     }
 
     > small {
