@@ -1,26 +1,40 @@
 import s from "./contact.module.scss"
 
 import cx from "clsx"
-import * as yup from "yup"
 import { useFormik } from "formik"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import * as yup from "yup"
 
 import { IconArrow } from "@/components/icons/icon-arrow"
 import { Img } from "@/components/utility/img"
 import { Link } from "@/components/utility/link"
 import { DefaultLayout } from "@/layouts/default"
 
+import { useContact } from "@/api/mutations/contact"
+import { useLenisStore } from "@/lib/store/lenis"
+import { ContactReason } from "@/types"
+
 import blob from "@/public/img/contact-blob.png"
 import smile from "@/public/img/contact-smile.png"
 import dropALine from "@/public/img/drop-a-line.svg"
 import accept from "@/public/img/privacy-accept.svg"
+import { useRouter } from "next/router"
 
 const Contact = () => {
+  const router = useRouter()
+  const { lenis } = useLenisStore()
+  const contactFormRef = useRef(null)
   const [privacyAccepted, setPrivacyAccepted] = useState(false)
   const togglePrivacy = () => setPrivacyAccepted((prev) => !prev)
+  const mutation = useContact()
 
   const formik = useFormik({
-    initialValues: { name: "", contactReason: "", email: "", message: "" },
+    initialValues: {
+      name: "",
+      contactReason: router.query.contactReason as ContactReason,
+      email: "",
+      message: "",
+    },
     validationSchema: yup.object().shape({
       name: yup.string().required("This field is required."),
       contactReason: yup.string().required("This field is required."),
@@ -29,16 +43,28 @@ const Contact = () => {
     }),
     onSubmit: (values) => {
       console.log(values)
-      // mutation.mutate(values)
+      mutation.mutate(values)
     },
   })
+
+  useEffect(() => {
+    if (!router.query.contactReason) return
+
+    const timeout = setTimeout(() => {
+      lenis?.scrollTo(contactFormRef.current, {
+        duration: 1,
+        lock: true,
+      })
+    }, 1)
+
+    return () => clearTimeout(timeout)
+  }, [router.query.contactReason, lenis])
 
   return (
     <DefaultLayout
       seo={{
         title: "JUST DESIGN FX",
-        description:
-          "We design iconic brands with future impact. JUST DESIGN FX is a future-focused brand and digital design agency with offices located in Istanbul and New York.",
+        description: "Learn about our design services, team members, clients and awards.",
       }}
     >
       <section className={cx(s.intro, "flex flex-col items-center")}>
@@ -64,21 +90,18 @@ const Contact = () => {
         </div>
       </section>
 
-      <section className={s.contactForm}>
+      <section className={s.contactForm} ref={contactFormRef}>
         <div className={s.imgC}>
           <Img src={dropALine} className={s.dropALine} alt="Drop A Line" />
         </div>
 
-        <form className={s.form} onSubmit={formik.handleSubmit}>
+        <form className="flex flex-col w-full h-full" onSubmit={formik.handleSubmit}>
           <div className={s.rowX}>
-            <h2 className={s.formText}>
+            <p className={s.text}>
               HELLO,
               <br /> MY NAME IS
-            </h2>
-            <div className={s.inputWrapper}>
-              <label htmlFor="name" className={cx(s.label, s.companyLabel)}>
-                YOUR NAME / COMPANY
-              </label>
+            </p>
+            <div className={s.inputC}>
               <input
                 id="name"
                 name="name"
@@ -90,38 +113,35 @@ const Contact = () => {
             </div>
           </div>
 
-          <div className={s.rowY}>
-            <h2 className={s.formText}>
+          <div className={cx(s.rowY, "flex flex-col")}>
+            <p className={s.text}>
               I&apos;M EXCITED TO <br /> CONTACT YOUR <br /> STUDIO ABOUT A
-            </h2>
-            <div className={cx(s.buttons, "flex items-center gap-5")}>
+            </p>
+            <div className={cx(s.buttons, "flex flex-col tablet:flex-row items-center gap-5")}>
               <div
-                onClick={() => formik.setFieldValue("contactReason", "NEW_PROJECT")}
-                className={cx(s.reasonBtn, "cursor-pointer", {
-                  [s.active]: formik.values.contactReason === "NEW_PROJECT",
+                onClick={() => formik.setFieldValue("contactReason", ContactReason.newProject)}
+                className={cx(s.btn, "flex items-center justify-center cursor-pointer", {
+                  [s.active]: formik.values.contactReason === ContactReason.newProject,
                 })}
               >
-                <p className={s.btnText}>NEW PROJECT</p>
+                <span>NEW PROJECT</span>
               </div>
               <div
-                onClick={() => formik.setFieldValue("contactReason", "MEDIA_INQUIRY")}
-                className={cx(s.reasonBtn, "cursor-pointer", {
-                  [s.active]: formik.values.contactReason === "MEDIA_INQUIRY",
+                onClick={() => formik.setFieldValue("contactReason", ContactReason.mediaInquiry)}
+                className={cx(s.btn, "flex items-center justify-center cursor-pointer", {
+                  [s.active]: formik.values.contactReason === ContactReason.mediaInquiry,
                 })}
               >
-                <p className={s.btnText}>MEDIA INQUIRY</p>
+                <span>MEDIA INQUIRY</span>
               </div>
             </div>
           </div>
 
           <div className={s.rowX}>
-            <h2 className={s.formText}>
+            <p className={s.text}>
               PLEASE <br /> REACH ME AT
-            </h2>
-            <div className={s.inputWrapper}>
-              <label htmlFor="email" className={cx(s.label, s.emailLabel)}>
-                YOUR EMAIL ADDRESS
-              </label>
+            </p>
+            <div className={s.inputC}>
               <input
                 id="email"
                 name="email"
@@ -134,59 +154,61 @@ const Contact = () => {
           </div>
 
           <div className={s.rowX}>
-            <h2 className={s.formText}>
+            <p className={s.text}>
               I&apos;M
               <br /> REACHING OUT
               <br /> ABOUT ...
-            </h2>
+            </p>
           </div>
 
           <div className={s.rowX}>
-            <div className={cx(s.inputWrapper, s.textarea)}>
-              {/* {!message && (
-                <label
-                  style={{
-                    textAlign: window.innerWidth > breakpoints.mobile ? "left" : "center",
-                  }}
-                  className={cx(s.label, s.messageLabel)}
-                >
-                  YOUR MESSAGE
-                </label>
-              )} */}
+            <div className={cx(s.inputC, s.textarea)}>
               <textarea
                 id="message"
                 name="message"
                 onChange={formik?.handleChange}
-                placeholder="MESSAGE"
+                placeholder="YOUR MESSAGE"
                 value={formik?.values.message}
               />
             </div>
           </div>
 
-          <div className={cx(s.actions, "flex items-center gap-5", { [s.checked]: privacyAccepted })}>
-            <div className={cx(s.btnC, "cursor-pointer")} onClick={togglePrivacy}>
+          <div
+            className={cx(s.submitC, "flex flex-col tablet:flex-row items-center gap-5", {
+              [s.checked]: privacyAccepted,
+            })}
+          >
+            <div className={cx(s.acceptC, "cursor-pointer")} onClick={togglePrivacy}>
               <div className={s.imgC}>
-                <Img className={s.accept} src={accept} alt="Accept Visual" />
+                <Img className={s.accept} src={accept} alt="Accept Sticker" />
               </div>
             </div>
 
             <p className={cx(s.privacyText, "cursor-pointer")}>
               <span onClick={togglePrivacy}> I&apos;ve read and accepted the </span>
               <br />
-              <Link className={s.link} external to="/privacy-policy">
+              <Link className={s.link} external="true" href="/privacy-policy">
                 Privacy Policy
               </Link>
               <span onClick={togglePrivacy}> standards of this website.</span>
             </p>
 
-            <button className={cx(s.submitBtn, "cursor-pointer")} type="submit">
+            <button
+              className={cx(s.submitBtn, "hidden tablet:flex items-center justify-center ml-auto cursor-pointer")}
+              disabled={!privacyAccepted}
+              type="submit"
+            >
               <span>SEND</span>
             </button>
 
-            <button className={s.submitBtnMobile} type="submit">
-              <p className={s.btnText}>SEND</p>
-              <div className={s.iconRightArrow}>
-                <IconArrow rotate={-45} fill="var(--white)" />
+            <button
+              className={cx(s.submitBtnMobile, "flex tablet:hidden items-center gap-7")}
+              disabled={!privacyAccepted}
+              type="submit"
+            >
+              <span>SEND</span>
+              <div className={s.iconC}>
+                <IconArrow fill="var(--black)" rotate={45} />
               </div>
             </button>
           </div>

@@ -101,8 +101,18 @@ export interface TeamMemberProps {
   iconImage: string
   linkedin: string
 }
-
 export interface Filter {
   id: string
   title: string
+}
+export interface ContactForm {
+  name: string
+  email: string
+  message: string
+  contactReason: ContactReason | null
+}
+
+export enum ContactReason {
+  newProject = "NEW_PROJECT",
+  mediaInquiry = "MEDIA_INQUIRY",
 }

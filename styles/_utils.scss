@@ -118,3 +118,14 @@ html.has-scroll-smooth {
   @include position(absolute, 50%, auto, auto, 50%);
   transform: translate(-50%, -50%);
 }
+
+.remove-autofill-styles {
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: inherit;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
