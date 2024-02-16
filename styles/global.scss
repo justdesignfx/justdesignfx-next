@@ -40,7 +40,7 @@
   --br-xl: #{desktop-vw(100px)};
 
   @include mobile {
-    --header-height: #{mobile-vw(60px)};
+    --header-height: #{mobile-vw(100px)};
     --page-padding-top: #{mobile-vw(30px)};
     --upcoming-accordion-height: #{mobile-vw(30px)};
     --nav-height: #{mobile-vw(30px)};
@@ -64,6 +64,7 @@
 html {
   color: var(--black);
   font-family: Arial, Helvetica, sans-serif;
+  pointer-events: auto;
   // scrollbar-width: thin;
   @extend .noSelect;
 }
@@ -94,11 +95,9 @@ select {
   color: var(--kuretake-black-manga);
 }
 
-// main {
-//   overflow: hidden;
-//   position: relative;
-//   z-index: z-index("main");
-// }
+input {
+  @extend .remove-autofill-styles;
+}
 
 * {
   -webkit-font-smoothing: antialiased;
@@ -179,43 +178,6 @@ sup {
 
   @include mobile {
     margin-bottom: mobile-vw(16px);
-  }
-}
-
-.animated-btn {
-  position: relative;
-  display: inline-block;
-
-  &::before,
-  &::after {
-    content: "";
-    @include position(absolute, auto, auto, -2px, 0);
-    @include dims(100%, 2px);
-    background: var(--btn-theme-color);
-    transform-origin: right;
-    transform: scaleX(1) translateZ(0);
-    transition: transform 600ms cubic-bezier(0.165, 0.84, 0.44, 1) 200ms;
-    will-change: transform;
-  }
-
-  &::before {
-    transform-origin: left;
-    transform: scaleX(0) translateZ(0);
-    transition: transform 600ms cubic-bezier(0.165, 0.84, 0.44, 1);
-  }
-
-  @include hover {
-    &:hover {
-      &::after {
-        transform: scaleX(0) translateZ(0);
-        transition: transform 600ms cubic-bezier(0.165, 0.84, 0.44, 1);
-      }
-
-      &::before {
-        transform: scaleX(1) translateZ(0);
-        transition: transform 600ms cubic-bezier(0.165, 0.84, 0.44, 1) 200ms;
-      }
-    }
   }
 }
 
