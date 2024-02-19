@@ -2,6 +2,12 @@
   @include dims(desktop-vw(150px));
   transition: 200ms all ease;
 
+  @include mobile {
+    @include position(absolute, mobile-vw(-10px), auto, auto, mobile-vw(-10px));
+    @include dims(mobile-vw(100px));
+    transform: rotate(-9deg);
+  }
+
   .eye,
   .mouth {
     transition: 300ms transform ease;

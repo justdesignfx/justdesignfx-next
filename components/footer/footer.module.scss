@@ -1,8 +1,129 @@
 .footer {
   background: var(--black);
+
+  .btn {
+    @include dims(desktop-vw(170px), desktop-vw(35px));
+    border-radius: desktop-vw(32px);
+    border: 1px solid var(--palladium);
+    color: var(--white);
+
+    @include mobile {
+      @include dims(mobile-vw(170px), mobile-vw(35px));
+      border-radius: mobile-vw(32px);
+    }
+
+    @include hover {
+      &:hover {
+        background-color: var(--isotonic-water);
+        border: 1px solid var(--isotonic-water);
+        color: var(--black);
+      }
+    }
+
+    > span {
+      font-family: var(--font-visby-cf);
+      font-weight: 500;
+      font-size: desktop-vw(16px);
+      white-space: nowrap;
+      transform: translateY(0.1ch);
+
+      @include mobile {
+        font-size: mobile-vw(16px);
+        text-align: center;
+      }
+    }
+  }
+
+  .btnGetDirection {
+    column-gap: desktop-vw(16px);
+    display: flex;
+    align-items: center;
+
+    @include mobile {
+      @include dims(mobile-vw(170px), mobile-vw(35px));
+      column-gap: mobile-vw(16px);
+      border: 1px solid var(--palladium);
+      border-radius: mobile-vw(32px);
+      justify-content: center;
+      padding: unset;
+    }
+
+    @include hover {
+      &:hover {
+        .iconC {
+          transform: rotate(45deg);
+        }
+      }
+    }
+
+    > span {
+      color: var(--white);
+      font-family: var(--font-visby-cf);
+      font-size: desktop-vw(14px);
+      font-weight: 500;
+      transform: translateY(0.1ch);
+      white-space: nowrap;
+
+      @include mobile {
+        font-size: mobile-vw(15px);
+      }
+    }
+
+    .iconC {
+      @include dims(desktop-vw(12px));
+
+      @include mobile {
+        @include dims(mobile-vw(12px));
+      }
+    }
+  }
+
+  .title {
+    color: var(--white);
+    font-family: var(--font-visby-cf);
+    font-size: desktop-vw(16px);
+    font-weight: 600;
+    margin-bottom: desktop-vw(20px);
+
+    @include mobile {
+      font-size: mobile-vw(20px);
+      margin-bottom: mobile-vw(20px);
+    }
+  }
+
+  .text {
+    color: var(--palladium);
+    font-family: var(--font-visby-cf);
+    font-size: desktop-vw(18px);
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: desktop-vw(30px);
+
+    @include mobile {
+      text-align: center;
+      font-size: mobile-vw(16px);
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 10vw;
+      width: 95%;
+    }
+
+    &.sm {
+      font-size: desktop-vw(16px);
+      margin-bottom: desktop-vw(50px);
+
+      @include mobile {
+        font-size: 15px;
+        line-height: 36px;
+        width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
 }
 
-.contact {
+.contactInfo {
   padding: desktop-vw(50px);
 
   @include mobile {
@@ -17,59 +138,8 @@
     margin-bottom: desktop-vw(30px);
 
     @include mobile {
-      font-size: 15vw;
-    }
-  }
-
-  .addressTitle {
-    color: var(--white);
-    font-family: var(--font-visby-cf);
-    font-size: desktop-vw(16px);
-    font-weight: 600;
-    margin-bottom: desktop-vw(20px);
-
-    @include mobile {
-      font-size: 5vw;
-    }
-  }
-
-  .text {
-    color: var(--palladium);
-    font-family: var(--font-visby-cf);
-    font-size: desktop-vw(18px);
-    font-weight: 400;
-    line-height: 1.6;
-    margin-bottom: desktop-vw(30px);
-
-    @include mobile {
-      text-align: center;
-      font-size: 1rem;
-      margin-left: auto;
-      margin-right: auto;
-      margin-bottom: 10vw;
-      width: 95%;
-
-      br {
-        display: none;
-      }
-    }
-  }
-
-  .textSm {
-    color: var(--palladium);
-    font-family: var(--font-visby-cf);
-    font-size: desktop-vw(16px);
-    font-weight: 400;
-    line-height: 1.6;
-    margin-bottom: desktop-vw(50px);
-
-    @include mobile {
-      text-align: center;
-      font-size: 15px;
-      line-height: 36px;
-      width: 85%;
-      margin-left: auto;
-      margin-right: auto;
+      font-size: mobile-vw(48px);
+      margin-bottom: mobile-vw(30px);
     }
   }
 
@@ -80,71 +150,28 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 15vw;
+      margin-bottom: mobile-vw(100px);
       justify-content: center;
-      width: 100%;
-      margin-bottom: 25vw;
+
+      &:last-child {
+        margin-bottom: unset;
+      }
     }
 
     &:nth-child(1) {
       margin-right: auto;
+
+      @include mobile {
+        margin-right: unset;
+      }
     }
 
     &:nth-child(2) {
       margin-right: desktop-vw(150px);
-    }
-  }
-
-  .btn {
-    @include dims(desktop-vw(170px), desktop-vw(35px));
-    border-radius: desktop-vw(28px);
-    border: 1px solid var(--palladium);
-    color: var(--white);
-
-    @include hover {
-      &:hover {
-        background-color: var(--isotonic-water);
-        border: 1px solid var(--isotonic-water);
-        color: var(--black);
-      }
-    }
-
-    > span {
-      font-family: var(--font-visby-cf);
-      font-weight: 500;
-      font-size: desktop-vw(16px);
-      white-space: nowrap;
-      text-align: center;
-      transform: translateY(0.1ch);
 
       @include mobile {
-        font-size: mobile-vw(16px);
+        margin-right: unset;
       }
-    }
-  }
-
-  .btnGetDirection {
-    padding: desktop-vw(4px) desltop-vw(12px);
-
-    @include hover {
-      &:hover {
-        .iconC {
-          transform: rotate(45deg);
-        }
-      }
-    }
-
-    > span {
-      color: var(--white);
-      font-family: var(--font-visby-cf);
-      font-size: desktop-vw(14px);
-      font-weight: 500;
-      transform: translateY(0.1ch);
-      white-space: nowrap;
-    }
-
-    .iconC {
-      @include dims(desktop-vw(12px));
     }
   }
 }
@@ -154,6 +181,7 @@
   padding: desktop-vw(50px);
 
   @include mobile {
+    margin-top: mobile-vw(50px);
     padding: mobile-vw(50px);
   }
 
@@ -164,102 +192,98 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 15vw;
+      margin-bottom: mobile-vw(100px);
       justify-content: center;
-      width: 100%;
-      margin-bottom: 25vw;
+
+      &:last-child {
+        margin-bottom: unset;
+      }
     }
 
     &:nth-child(2) {
       margin-left: desktop-vw(100px);
       margin-right: auto;
-    }
-
-    > h5 {
-      color: var(--white);
-      font-family: var(--font-visby-cf);
-      font-size: desktop-vw(16px);
-      font-weight: 600;
-      margin-bottom: desktop-vw(20px);
 
       @include mobile {
-        font-size: 5vw;
+        margin-left: unset;
+        margin-right: unset;
       }
     }
+  }
+}
 
-    > p {
-      color: var(--palladium);
-      font-family: var(--font-visby-cf);
-      font-size: desktop-vw(16px);
-      font-weight: 400;
-      line-height: 1.6;
-      margin-bottom: desktop-vw(50px);
+.copyright {
+  padding: desktop-vw(25px) desktop-vw(50px);
+
+  @include mobile {
+    padding: mobile-vw(25px) mobile-vw(16px);
+    padding-bottom: mobile-vw(75px);
+  }
+
+  .rights {
+    color: var(--white);
+    font-family: var(--font-visby-cf);
+    font-size: desktop-vw(16px);
+    font-weight: 400;
+
+    @include mobile {
+      font-size: mobile-vw(15px);
+      order: 3;
+      text-align: center;
+    }
+
+    .year {
+      margin-left: desktop-vw(6px);
 
       @include mobile {
-        text-align: center;
-        font-size: 15px;
-        line-height: 36px;
-        width: 85%;
-        margin-left: auto;
-        margin-right: auto;
-
-        br {
-          display: none;
-        }
+        margin-left: mobile-vw(6px);
       }
     }
   }
 
-  .btn {
-    @include dims(desktop-vw(170px), desktop-vw(35px));
-    border-radius: desktop-vw(28px);
-    border: 1px solid var(--palladium);
-    color: var(--white);
+  .legal {
+    margin-left: auto;
 
-    @include hover {
-      &:hover {
-        background-color: var(--isotonic-water);
-        border: 1px solid var(--isotonic-water);
-        color: var(--black);
-      }
+    @include mobile {
+      margin-bottom: mobile-vw(50px);
+      margin-left: 0;
+      order: 2;
     }
 
-    > span {
+    .link {
+      color: var(--white);
       font-family: var(--font-visby-cf);
-      font-weight: 500;
       font-size: desktop-vw(16px);
-      white-space: nowrap;
-      text-align: center;
-      transform: translateY(0.1ch);
+      font-weight: 400;
 
       @include mobile {
         font-size: mobile-vw(16px);
       }
+
+      &:nth-child(1),
+      &:nth-child(2) {
+        text-decoration: underline;
+        text-decoration-color: var(--white);
+      }
     }
   }
 
-  .btnGetDirection {
-    padding: desktop-vw(4px) desltop-vw(12px);
+  .social {
+    margin-left: desktop-vw(150px);
+    column-gap: desktop-vw(48px);
 
-    @include hover {
-      &:hover {
-        .iconC {
-          transform: rotate(45deg);
-        }
-      }
-    }
-
-    > span {
-      color: var(--white);
-      font-family: var(--font-visby-cf);
-      font-size: desktop-vw(14px);
-      font-weight: 500;
-      transform: translateY(0.1ch);
-      white-space: nowrap;
+    @include mobile {
+      margin: mobile-vw(50px) 0;
+      column-gap: mobile-vw(57px);
+      order: 1;
     }
 
     .iconC {
-      @include dims(desktop-vw(12px));
+      @include dims(auto, desktop-vw(28px));
+
+      @include mobile {
+        @include dims(auto, mobile-vw(32px));
+      }
     }
   }
 }
@@ -329,68 +353,6 @@
     @include mobile {
       font-size: 7vw;
       padding: 0.15rem 4rem 0.25rem 4rem;
-    }
-  }
-}
-
-.copyright {
-  padding: desktop-vw(25px) desktop-vw(50px) desktop-vw(75px) desktop-vw(50px);
-  padding-bottom: desktop-vw(75px);
-
-  @include mobile {
-    flex-direction: column-reverse;
-    justify-content: center;
-    gap: 7vw;
-    margin-bottom: 5vw;
-  }
-
-  .rights {
-    color: var(--white);
-    font-family: var(--font-visby-cf);
-    font-size: desktop-vw(16px);
-    font-weight: 400;
-
-    @include mobile {
-      font-size: 14px;
-    }
-
-    .year {
-      margin-left: desktop-vw(6px);
-    }
-  }
-
-  .legal {
-    margin-left: auto;
-
-    @include mobile {
-      margin-bottom: 0;
-      margin-left: 0;
-    }
-
-    .link {
-      color: var(--white);
-      font-family: var(--font-visby-cf);
-      font-size: desktop-vw(16px);
-      font-weight: 400;
-
-      @include mobile {
-        font-size: 1rem;
-      }
-
-      &:nth-child(1),
-      &:nth-child(2) {
-        text-decoration: underline;
-        text-decoration-color: var(--white);
-      }
-    }
-  }
-
-  .social {
-    margin-left: desktop-vw(150px);
-    column-gap: desktop-vw(57px);
-
-    .iconC {
-      @include dims(auto, desktop-vw(32px));
     }
   }
 }

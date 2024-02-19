@@ -47,12 +47,12 @@ const Subscribe = () => {
   // )
 
   return (
-    <div className={cx(s.subscribe, "flex items-center justify-between")}>
-      <form className="flex flex-col items-start" onSubmit={formik.handleSubmit}>
-        <div className={cx(s.field, "flex flex-col items-start justify-start")}>
+    <div className={cx(s.subscribe, "flex flex-col tablet:flex-row items-center justify-between")}>
+      <form className={cx("flex flex-col items-stretch tablet:items-start")} onSubmit={formik.handleSubmit}>
+        <div className={cx(s.field, "flex flex-col items-center tablet:items-start justify-start")}>
           <label htmlFor="email">
             SUBSCRIBE TO
-            <br /> OUR EMAIL
+            <br className={cx("block tablet:hidden")} /> OUR EMAIL
           </label>
           <input
             id="email"
@@ -73,9 +73,9 @@ const Subscribe = () => {
             <div className={s.checkbox}>
               <div className={cx(s.inner, { [s.checked]: radioChecked })}></div>
             </div>
-            <p className={s.radioText}>
-              Join our design community to be a part of the future…! <br /> By subscribing, you consent to receive
-              emails from us.
+            <p>
+              Join our design community to be a part of the future…! <br className={cx("hidden tablet:block")} /> By
+              subscribing, you consent to receive emails from us.
             </p>
           </div>
         </div>
