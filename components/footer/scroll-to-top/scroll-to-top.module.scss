@@ -3,9 +3,10 @@
   transition: 200ms all ease;
 
   @include mobile {
-    @include position(absolute, mobile-vw(-10px), auto, auto, mobile-vw(-10px));
-    @include dims(mobile-vw(100px));
-    transform: rotate(-9deg);
+    // @include position(absolute, mobile-vw(10px), mobile-vw(10px), auto, auto);
+    // @include dims(mobile-vw(80px));
+    // transform: rotate(9deg);
+    display: none;
   }
 
   .eye,

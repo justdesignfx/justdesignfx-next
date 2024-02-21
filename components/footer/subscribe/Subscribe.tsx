@@ -2,49 +2,66 @@ import s from "./subscribe.module.scss"
 
 import cx from "clsx"
 import { useFormik } from "formik"
-import { useState } from "react"
 import * as yup from "yup"
-import { ScrollToTop } from "../scroll-to-top"
+
+import { ScrollToTop } from "@/components/scroll-to-top"
+import { Img } from "@/components/utility/img"
+
 import { useSubscribe } from "@/api/mutations/subscribe"
+import { useModalStore } from "@/lib/store/modal"
+
+import subscribeGif from "@/public/img/subscribe.gif"
+
+const initialValues = { email: "", privacyChecked: false }
+
+const validationSchema = yup.object().shape({
+  email: yup.string().email("It must be a valid email.").required("This field is required."),
+  privacyChecked: yup.boolean(),
+})
 
 const Subscribe = () => {
-  const [radioChecked, setRadioChecked] = useState(false)
-  const [errorMessage, setErrorMessage] = useState<string | null>(null)
-
-  const mutation = useSubscribe()
+  const { setContent, setIsOpen, closeModal } = useModalStore()
+  const { data: result, mutate, reset } = useSubscribe()
 
   const formik = useFormik({
-    initialValues: { email: "" },
-    validationSchema: yup.object().shape({
-      email: yup.string().email("It must be a valid email.").required("This field is required."),
-    }),
-    onSubmit: (values) => {
-      console.log(values)
-      mutation.mutate(values)
+    initialValues,
+    validationSchema,
+    onSubmit: ({ email }) => {
+      mutate(
+        { email },
+        {
+          onSuccess(data) {
+            if (!data.success) return
+
+            setContent(
+              <div className={cx(s.subscribeSuccess, "flex flex-col items-center")}>
+                <div className={s.imgC}>
+                  <Img src={subscribeGif} alt="Hand With Mail" />
+                </div>
+                <p className={s.title}>Welcome aboard!</p>
+                <p className={s.text}>We&apos;ll keep in touch with news from the future...</p>
+                <button
+                  className={cx("flex items-center justify-center cursor-pointer")}
+                  onClick={handleClose}
+                  type="button"
+                >
+                  <span>DONE</span>
+                </button>
+              </div>
+            )
+            setIsOpen(true)
+          },
+        }
+      )
+      console.log({ email })
     },
   })
 
-  const toggleCheckbox = () => setRadioChecked((prev) => !prev)
-
-  //   const resetForm = () => {
-  //     if (subscribeFormRef.current) subscribeFormRef.current.reset()
-  //     setEmail(null)
-  //     setRadioChecked(false)
-  //     setErrorMessage(null)
-  //   }
-
-  // const modalStore = useModalStore()
-
-  // const subscribeSuccessModalContent = (
-  //   <div className={s.subscribeSuccess}>
-  //     <img className={s.welcomeAboard} src={subscribeGif} alt="Hand With Mail" />
-  //     <h5 className={s.title}>Welcome aboard!</h5>
-  //     <p className={s.text}>We'll keep in touch with news from the future...</p>
-  //     <button className={s.doneButton} type="button" onClick={() => modalStore.toggle()}>
-  //       DONE
-  //     </button>
-  //   </div>
-  // )
+  function handleClose() {
+    closeModal()
+    reset()
+    formik.resetForm()
+  }
 
   return (
     <div className={cx(s.subscribe, "flex flex-col tablet:flex-row items-center justify-between")}>
@@ -62,16 +79,19 @@ const Subscribe = () => {
             type="email"
             value={formik?.values.email}
           />
-          {errorMessage && (
+          {!result?.success && (
             <div className={s.errorMessage}>
-              <small>{errorMessage}</small>
+              <small>{result?.message}</small>
             </div>
           )}
         </div>
         <div className={cx(s.privacyCheck, "flex flex-col items-start justify-start cursor-pointer")}>
-          <div className={cx(s.checkboxC, "flex items-start justify-start gap-4")} onClick={toggleCheckbox}>
+          <div
+            className={cx(s.checkboxC, "flex items-start justify-start gap-4")}
+            onClick={() => formik.setFieldValue("privacyChecked", !formik.values.privacyChecked)}
+          >
             <div className={s.checkbox}>
-              <div className={cx(s.inner, { [s.checked]: radioChecked })}></div>
+              <div className={cx(s.inner, { [s.checked]: formik.values.privacyChecked })}></div>
             </div>
             <p>
               Join our design community to be a part of the future…! <br className={cx("hidden tablet:block")} /> By
@@ -79,7 +99,7 @@ const Subscribe = () => {
             </p>
           </div>
         </div>
-        <button className={s.submitBtn} disabled={!radioChecked} type="submit">
+        <button className={s.submitBtn} disabled={!formik.values.privacyChecked} type="submit">
           SEND
         </button>
       </form>

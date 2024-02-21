@@ -3,16 +3,7 @@ import { useMutation } from "react-query"
 
 // POST subscribe email
 async function submitSubscribe({ email }: { email: string }) {
-  const res = await apiClient.post<{ success: boolean; message: string }>(
-    "/home/subscribe.php",
-    { email },
-    {
-      headers: {
-        ContentType: "application/json",
-        Accept: "application/json",
-      },
-    }
-  )
+  const res = await apiClient.post<{ success: boolean; message: string }>("/home/subscribe.php", { email })
   return res.data
 }
 
@@ -25,9 +16,6 @@ export function useSubscribe() {
       console.log(`error`, err)
     },
     onSuccess: (res) => {
-      res
-    },
-    onSettled: (res) => {
       res
     },
   })
