@@ -1,3 +1,5 @@
+import { MouseEvent } from "react"
+
 export const breakpoints = {
   mobile: 800,
   tablet: 1024,
@@ -60,4 +62,8 @@ export function isEven(num: number) {
   }
 
   return false
+}
+
+export function stopPropagation(e: MouseEvent) {
+  e.stopPropagation()
 }

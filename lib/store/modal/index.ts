@@ -6,7 +6,7 @@ interface State {
   isOpen: boolean
   setIsOpen: (status: boolean) => void
   setContent: (node: ReactNode) => void
-  close: () => void
+  closeModal: () => void
 }
 
 export const useStore = create<State>((set) => ({
@@ -17,7 +17,7 @@ export const useStore = create<State>((set) => ({
     set({ content: node })
     set({ isOpen: true })
   },
-  close: () => {
+  closeModal: () => {
     set({ isOpen: false })
     set({ content: null })
   },
