@@ -1,9 +1,17 @@
 .cardMember {
   margin-left: desktop-vw(200px);
 
+  @include mobile {
+    margin-left: unset;
+  }
+
   .imgC {
     @include dims(desktop-vw(360px), desktop-vw(440px));
     position: relative;
+
+    @include mobile {
+      @include dims(mobile-vw(300px), mobile-vw(360px));
+    }
 
     .memberPic {
       @include dims(100%);
@@ -12,9 +20,7 @@
       overflow: hidden;
 
       @include mobile {
-        border-radius: 15vw;
-        width: 90vw;
-        height: 100vw;
+        border-radius: mobile-vw(16px);
       }
     }
 
@@ -28,10 +34,20 @@
       transform: translate(50%, -50%);
       z-index: 10;
 
+      @include mobile {
+        @include position(absolute, 0, auto, auto, mobile-vw(16px));
+        @include dims(mobile-vw(100px));
+        transform: translate(-50%, -50%);
+      }
+
       .emoji {
         @include position(absolute, 50%, 50%, auto, auto);
         @include dims(desktop-vw(45px));
         transform: translate(50%, -50%);
+
+        @include mobile {
+          @include dims(mobile-vw(45px));
+        }
       }
     }
   }
@@ -39,7 +55,7 @@
   .info {
     color: var(--white);
 
-    .credentials {
+    > p {
       font-family: var(--font-vanguard-cf);
       font-size: desktop-vw(64px);
       font-weight: 700;
@@ -47,29 +63,32 @@
       width: desktop-vw(350px);
 
       @include mobile {
-        font-size: 11vw;
-
-        br {
-          display: none;
-        }
+        font-size: mobile-vw(40px);
+        margin-bottom: mobile-vw(20px);
+        width: auto;
       }
     }
 
-    .role {
+    > small {
       font-family: var(--font-visby-cf);
       font-size: desktop-vw(16px);
+      font-weight: 100;
       margin-bottom: desktop-vw(30px);
       text-transform: uppercase;
       white-space: nowrap;
 
       @include mobile {
-        font-size: 5.5vw;
-        margin-top: -1vw;
+        font-size: mobile-vw(14px);
+        margin-bottom: mobile-vw(30px);
       }
     }
 
     .iconC {
       @include dims(desktop-vw(24px));
+
+      @include mobile {
+        @include dims(mobile-vw(24px));
+      }
     }
   }
 }
